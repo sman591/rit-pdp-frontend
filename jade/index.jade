@@ -1,0 +1,41 @@
+extends !templates/basic.jade
+
+block nav
+	mixin nav('Home')
+
+block main
+	div.block.twothird
+		//- Uncomment the section below if there's something important to say
+		//- 
+		//- h2 Important &amp; Time Sensitive
+		//- p.content.important.
+		//- 	A deadline is approaching! Do the thing you have to do before the deadline
+		
+		h2 Recent &amp; Upcoming Events
+		ul.content
+			li.date xxxxday, Month xx
+			li This should autopopulate from the calendar
+			li Because it would be obnoxious to have to write this by hand every week and a half or so
+			li.date xxxxday, Month xx
+			li But I do think it should list a week and a half ahead of the current department
+			li.date xxxxday, Month xx
+			li And then repopulate every week so there's a half week of overlap always
+			li.date xxxxday, Month xx
+			li I hope that it will be at least this long
+			li Otherwise it looks a little funny
+			li Nothing breaks no matter how long/short it looks but it just looks funny
+			li Basically, it needs to be just longer than the mission statement to not look funny
+
+	div.block.onethird.right
+		h2 Mission Statement
+		p.content.
+			In support of the Department of Access Services mission the Professional Development Program (PDP) provides all members of the department the opportunity to expand their knowledge base, enhance their skills and advance their careers. PDP activities are developed and delivered through a staff driven collaborative process.
+		h2 Sign In
+		form.content
+			label(for='username') Username:
+				span.error Username incorrect
+			input(type='text', id='username')
+			label(for='password') Password:
+				span.error Password incorrect
+			input(type='password', id='username')
+			input(type='submit')

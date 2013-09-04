@@ -1,0 +1,25 @@
+//- person object
+mixin person(person, klass)
+	//- load info
+	include ../!includes/people/_directory
+
+	//- Build img path
+	firstLetter = person.charAt(0).toLowerCase();
+	lowercaseLastName = person.split(" ")[1].toLowerCase();
+
+	//- info variables
+	imgPath = "imgs/people/" +  firstLetter + "_" + lowercaseLastName + ".jpg";
+	altText = "Photo of " + person;
+	mailto = 'mailto:' + email + '@rit.edu';
+	//- var position from included directory info
+	//- var description from included directory info
+
+	//- build person object
+	div(class=["person", klass])
+		img(src= imgPath, alt= altText)
+		if displayName
+			a(href= mailto)= displayName
+		else
+			a(href= mailto)= person
+		p.position= position
+		p.description= description

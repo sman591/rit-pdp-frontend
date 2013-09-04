@@ -1,0 +1,14 @@
+pages = ['Home', 'Calendar', 'Committee', 'Forms', 'Resources', 'Blog', 'Contact', 'FAQ']
+
+mixin nav(page)
+	nav(class='mainNav')
+		for currentPage in pages
+			if currentPage == 'Home' 
+				lowercaseURL = 'index.html'
+			else
+				lowercaseURL = currentPage.charAt(0).toLowerCase() + currentPage.slice(1) + '.html'
+			if currentPage == page
+				a(href=lowercaseURL, class=currentPage + ' selected') #{currentPage}
+			else
+				a(href=lowercaseURL, class=currentPage) #{currentPage}
+		img(src='imgs/swoosh.png', class='swoosh')

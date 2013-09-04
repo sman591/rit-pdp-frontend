@@ -1,0 +1,23 @@
+// COLORS
+$orange:#F36E21;
+$brown:#513127;
+$highlight:#eeedd6;
+$lowlight:#cbcaac;
+$blue:#0E2AA6;
+
+// VARIABLES: ;
+$font-size:16;
+$line-height:1.5;
+
+// IMPORTS
+@import "normalize";
+@import "mixins";
+@import "extends";
+@import "general";
+@import "header";
+@import "footer";
+
+@import "blocks";
+@import "forms";
+@import "persons";
+@import "nav";

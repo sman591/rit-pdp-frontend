@@ -1,0 +1,46 @@
+extends !templates/basic.jade
+include !mixins/person.jade
+
+block nav
+	+nav('Committee')
+
+block main
+	div.block.full
+		nav.two
+			a(href="#").active Committee Members
+			a(href="#")	Committee Agendas &amp; Minutes
+		div.subpage
+			nav.custom
+				a(href="#")#all.active All Committee Members
+				a(href="#")#cias CIAS
+				a(href="#")#alot B/IT/CAST/SA
+				a(href="#")#la Liberal Arts
+				a(href="#")#alot2 Science/Engineering/SC/PS/Res Life
+				a(href="#")#rtc Real Time Captioning &amp; Notetaking
+			
+			//- person structure
+				.person.#{team}
+					img
+					a
+					p.position
+					p.description
+			+person('Deborah Makowski', 'all')
+			+person('Rico Peterson', 'all')
+			h2 CIAS Team
+			+person('Jamie Celentano', 'cias')
+			+person('Aaron Gorelick', 'cias')
+			h2 B/IT/CAST/SA Team
+			+person('Christmas Avila', 'alot')
+			+person('Christy Smith', 'alot')
+			h2 Liberal Arts Team
+			+person('Nicole Crouse-Dickerson', 'la')
+			+person('Jennifer Hayes', 'la')
+			h2 Science/Engineering/SC/PS/Res Life Team
+			+person('Jessica Morgan', 'alot2')
+			+person('Holly Jentsch', 'alot2')
+			h2 Real Time Captioning &amp; Notetaking Team
+			+person('Wendy Wheeler', 'rtc')
+			+person('Wendy Eldridge', 'rtc')
+
+		div.subpage.hide
+			p Under Construction

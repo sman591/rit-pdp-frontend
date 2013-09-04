@@ -1,0 +1,38 @@
+.block {
+	@extend %border-box;
+	border:5px solid $brown;
+	border-radius:10px;
+	display:inline-block;
+	h2 {
+		background-color:$brown;
+		padding:5px 0 10px 0;
+		color:white;
+		text-align:center;
+	}
+	h2 ~ h2 { padding-top:10px; }
+	> .content {
+		padding:2em;
+		background-color:white;
+		border-radius:0 0 6px 6px;
+	}
+	> ul {
+		list-style:inside;
+		> .date {
+			font-weight:bold;
+			list-style:none;
+		}
+	}
+	> .important { color:$orange; }
+}
+.onethird {
+	width:33%;
+	width:calc(33.3333% - 16px);
+}
+.twothird {
+	width:66%;
+	width:calc(66.6667% - 16px);
+}
+.full {
+	background-color:white;
+	width:100%;
+}

@@ -1,0 +1,52 @@
+include ../!mixins/nav.jade
+
+!!! 5
+html(lang="en")
+	head
+		title Professional Development Program
+		//- Meta
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		//- Prefetch
+		link(rel="dns-prefetch", href="//fonts.googleapis.com")
+		link(rel="dns-prefetch", href="//google-analytics.com")
+		//- favicon
+		link(rel="icon", href="imgs/favicon.png")
+		//- Style
+		link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600')
+		link(rel="stylesheet", href="style.min.css")
+		//- JS
+		script(src="scripts.min.js")
+
+	body(class='preload')
+		header: div.container
+			a(href='index.html', class='logo')
+				img(src='imgs/PDPLogo.png', alt='PDP Logo')
+			p(class='motto')
+				span Pause for PD...
+				| It's good for you!
+			nav(class='breadcrumbs')
+				a(href='http://rit.edu', target='_blank') RIT
+				a(href='http://ntid.rit.edu', target='_blank') NTID
+				a(href='http://ntid.rit.edu/das', target='_blank') DAS
+				a(href='http://index.html') Professional Development Program
+			block nav
+
+		main: div.container
+			block main
+			
+		footer: div.container
+			div(class='left')
+				a(href='http://rit.edu') Rochester Institute of Technology
+				a(href='http://ntid.rit.edu') National Technical Institute for the Deaf
+				a(href='http://ntid.rit.edu/das') Deartment of Access Services
+				p &copy; 2013
+			div(class='logos')
+				a(href='http://www.rid.org/', target='_blank')
+					img(src='imgs/RID.png', alt='RID logo')
+				a(href='http://www.rid.org/education/index.cfm/AID/99', target='_blank')
+					img(src='imgs/ACET.png', alt='ACET logo')
+				div(class='interpretek')
+					p Our Sponsor:
+					a(href='http://www.interpretek.com', target='_blank')
+						img(src='imgs/interpretek.png', alt='Interpretek logo')
