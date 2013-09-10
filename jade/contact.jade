@@ -1,0 +1,26 @@
+extends !templates/basic.jade
+
+block nav
+	+nav('Forms')
+
+block main
+	div.block.onehalf.center
+		h2 Drop us a line
+		form.content.center
+			label(for='name') My name is:
+				span#nameError.error Please enter your first and last name
+			input(type='text', id='name')
+
+			label(for='email') My email is:
+				span#emailError.error Please enter a valid email
+			input(type='text', id='email')
+
+			label(for='subject') I want to talk about:
+				span#subjectError.error Required Field
+			input(type='text', id='subject')
+
+			label(for='message') Here's what I have to say about it:
+				span#messageError.error Required Field
+			textarea(id='message', rows='6')
+
+			input(type='submit', id='submitButton', value='Send')

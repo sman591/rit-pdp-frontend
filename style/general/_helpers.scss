@@ -2,6 +2,9 @@
 .right { float:right; }
 .left { float:left; }
 .hide { display:none; }
+.center {
+	margin:0 auto;
+}
 
 /*	.preload: A kind of hacky way to stop elements from animating
 	on page load. JavaScript removes the class after page load. */

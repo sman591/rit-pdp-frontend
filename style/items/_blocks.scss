@@ -10,6 +10,7 @@
 		text-align:center;
 	}
 	h2 ~ h2 { padding-top:10px; }
+	&.center { display:block; }
 	> .content {
 		padding:2em;
 		background-color:white;
@@ -25,12 +26,13 @@
 	> .important { color:$orange; }
 }
 .onethird {
-	width:33%;
-	width:calc(33.3333% - 16px);
+	width:384px;
 }
 .twothird {
-	width:66%;
-	width:calc(66.6667% - 16px);
+	width:784px;
+}
+.onehalf {
+	width:584px;
 }
 .full {
 	background-color:white;

@@ -12,10 +12,16 @@ contentLoaded(window, function() {
 	// To stop stuff from animating on page load
 	document.querySelector("body").className = "";
 
-	// Done like this so I can have multiple files minified into 1 later
-	subPageNavigation();
-	committeePageNavigation();
+	if(window.location.href.indexOf("committee") > -1) {
+       	subPageNavigation();
+		committeePageNavigation();
+    }
+    if(window.location.href.indexOf("contact") > -1) {
+    	contact();
+    }
+
 });
 
 // @prepros-append !committeePageNavigation.js
 // @prepros-append !subPageNavigation.js
+// @prepros-append !contact.js
