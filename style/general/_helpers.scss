@@ -1,0 +1,11 @@
+.padding { padding:1em; }
+.right { float:right; }
+.left { float:left; }
+.hide { display:none; }
+
+/*	.preload: A kind of hacky way to stop elements from animating
+	on page load. JavaScript removes the class after page load. */
+.preload * {
+	transition:none !important;
+	-webkit-transition:none !important;
+}

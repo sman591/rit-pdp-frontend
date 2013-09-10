@@ -12,7 +12,6 @@ var committeePageNavigation = function () {
 	var laTeam = document.querySelectorAll('.la');
 	var alot2Team = document.querySelectorAll('.alot2');
 	var rtcTeam = document.querySelectorAll('.rtc');
-
 	var teamsDict = {
 		all: [all, people],
 		cias: [cias, ciasTeam],
@@ -56,20 +55,5 @@ var committeePageNavigation = function () {
 		if (teamsDict.hasOwnProperty(team)) { // safety check for using for...in 
 			teamsDict[team][0].addEventListener('click', function() { toggleActive(this); }, false);
 		}
-	}
-
-	var subPageNav = Array.prototype.slice.call(document.querySelectorAll('nav.two > a'));
-	var subPages = Array.prototype.slice.call(document.querySelectorAll('.subpage'));
-	
-	for (var i = 0; i < subPageNav.length; i++) {
-		subPageNav[i].addEventListener('click', function() {
-			console.log('click');
-			for (var i = 0; i < subPages.length; i++) {
-				if (subPages[i] === "" || "block")
-					subPages[i].style.display = "none";
-				else
-					subPages[i].style.display = "block";
-			}
-		}, false);
 	}
 };

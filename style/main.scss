@@ -10,14 +10,22 @@ $font-size:16;
 $line-height:1.5;
 
 // IMPORTS
-@import "normalize";
-@import "mixins";
-@import "extends";
-@import "general";
-@import "header";
-@import "footer";
+@import "general/extends";
+@import "general/helpers";
+@import "general/mixins";
+@import "general/normalize";
 
-@import "blocks";
-@import "forms";
-@import "persons";
-@import "nav";
+@import "elements/a";
+@import "elements/body";
+@import "elements/h2";
+@import "elements/html";
+@import "elements/main";
+@import "elements/nav";
+@import "elements/selection";
+
+@import "items/blocks";
+@import "items/container";
+@import "items/footer";
+@import "items/forms";
+@import "items/header";
+@import "items/persons";
