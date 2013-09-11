@@ -27,12 +27,15 @@
 }
 .onethird {
 	width:384px;
+	width:calc(33.3333% - 16px);
 }
 .twothird {
 	width:784px;
+	width:calc(66.6667% - 16px);
 }
 .onehalf {
 	width:584px;
+	width:calc(50% - 16px);
 }
 .full {
 	background-color:white;

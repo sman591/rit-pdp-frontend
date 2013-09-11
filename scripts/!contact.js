@@ -1,4 +1,4 @@
-var contact = function() {
+var contactValidation = function() {
 	var nameField = document.querySelector('#name');
 	var nameError = document.querySelector('#nameError');
 	var emailField = document.querySelector('#email');
@@ -55,4 +55,4 @@ var contact = function() {
 	});
 
 	submitButton.addEventListener('click', function() {  });
-}
+};
