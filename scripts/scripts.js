@@ -69,12 +69,18 @@ contentLoaded(window, function() {
 	// 	})
 	// }
 
-	if(window.location.href.indexOf("committee") > -1) {
-       	subPageNavigation();
-		committeePageNavigation();
-    }
-    if(window.location.href.indexOf("contact") > -1) {
-    	contactValidation();
-    }
+	var isPage = function(page) {
+		return window.location.href.indexOf(page) > -1;
+	}
 
+	if(isPage("resources")) {
+		subPageNavigation();
+	}
+	if (isPage("committee")) {
+		subPageNavigation();
+		committeePageNavigation();
+	}
+	if (isPage("contact")) {
+		contactValidation();
+	}
 });
