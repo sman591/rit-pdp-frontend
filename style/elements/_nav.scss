@@ -1,18 +1,14 @@
 main nav {
 	padding:2em 2em 0 2em;
-	> a {
+	a {
 		background-color:$lowlight;
 		color:white;
 		border-radius:4px;
 		padding:.5em 0;
 		text-align: center;
 		@include transition(background-color);
-		&:hover {
-			color:white;
-		}
-		&.active, &:hover {
-			background-color: $orange;
-		}
+		&:hover { color:white; }
+		&.active, &:hover { background-color: $orange; }
 	}
 	&.two {
 		> a {
@@ -23,15 +19,35 @@ main nav {
 			}
 		}
 	}
+	&.custom,
+	&.custom2 {
+		> a {
+			&:first-of-type { margin-left:0; }
+			&:last-of-type { margin-right:0; }
+		}
+	}
+
 	&.custom {
 		> a {
 			margin:0 7px;
-			padding: .5em 8px;
-			&:first-of-type {
-				margin-left:0;
-			}
-			&:last-of-type {
-				margin-right:0;
+			padding:.5em 8px;
+		}
+	}
+	&.custom2 {
+		> ul { display:table;
+			> li {
+				list-style-type:none;
+				display:table-cell;
+				vertical-align:middle;
+				text-align:center;
+				&:first-of-type, &:nth-of-type(2){ width:15%; }
+				&:first-of-type > a { margin-left:0; }
+				&:last-of-type > a { margin-right:0; }
+				> a {
+					display:inline-block;
+					margin:0 1em;
+					padding:.5em .5em;
+				}
 			}
 		}
 	}
