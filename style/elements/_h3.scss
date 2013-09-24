@@ -1,0 +1,9 @@
+h3 {
+	font-size:1em;
+	line-height:#{$line-height};
+	font-style:italic;
+	font-weight:normal;
+	background-color:$highlight;
+	padding:.5em 0 .5em 2em;
+	color:$brown;
+}

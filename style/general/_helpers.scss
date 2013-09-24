@@ -3,7 +3,17 @@
 .right { float:right; }
 .left { float:left; }
 .hide { display:none; }
-.center { margin:0 auto; }
+.center {
+	display:block !important; 
+	/* 
+	A lot of people consider using !important to be bad and should never be done. 
+	As you see, I have avoided it and it is not used in any other place. I use it here because this is a helper class.
+	If I'm/you're using .center, it is because there is not a more sematic class to use and display:block MUST be true for margin:0 auto; to work.
+	That's the philosophy I followed when including the important tag here.
+	*/
+	margin:0 auto;
+}
+.top-margin { margin-top:1em; }
 
 /*	.preload: A kind of hacky way to stop elements from animating
 	on page load. JavaScript removes the class after page load. */

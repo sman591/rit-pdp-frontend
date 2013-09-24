@@ -1,5 +1,4 @@
 p {
-	& + p {
-		margin-top:1em;
-	}
+	& + p,
+	ul + &  { @extend .top-margin; }
 }

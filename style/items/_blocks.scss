@@ -1,32 +1,16 @@
 .block {
 	@extend %border-box;
-	border:5px solid $brown;
-	border-radius:10px;
+	border:.25rem solid $brown;
+	border-radius:.75em;
 	display:inline-block;
-	h2 {
-		background-color:$brown;
-		padding:5px 0 10px 0;
-		color:white;
-		text-align:center;
-	}
-	h2 ~ h2 { padding-top:10px; }
-	&.center { display:block; }
-	> .content {
-		padding:2em;
-		background-color:white;
-		border-radius:0 0 6px 6px;
-	}
-	> ul {
-		list-style:inside;
-		> .date {
+	background-color:white;
+	.content { margin:2em; }
+	ul, ol {
+		> li:not(.topic) { margin-left:1.75em; }
+		> .topic {
 			font-weight:bold;
 			list-style:none;
 		}
-	}
-	> p {
-		&:first-of-type { padding:2em 2em 0 2em; }
-		padding:1em 2em 0 2em;
-		&:last-of-type { padding:2em; }
 	}
 	> .important { color:$orange; }
 }
@@ -42,7 +26,4 @@
 	width:584px;
 	width:calc(50% - 16px);
 }
-.full {
-	background-color:white;
-	width:100%;
-}
+.full { width:100%; }

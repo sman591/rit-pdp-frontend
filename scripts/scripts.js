@@ -10,6 +10,9 @@ var removeClass = function (element, removeClass) {
 	var regex = new RegExp('(?:^|\\s)' + removeClass + '(?!\\S)');
 	element.className = element.className.replace(regex, '' );
 };
+var toArray = function (element) {
+	return Array.prototype.slice.call(element);
+}
 
 contentLoaded(window, function() {
 	// To stop stuff from animating on page load
@@ -69,18 +72,21 @@ contentLoaded(window, function() {
 	// 	})
 	// }
 
-	var isPage = function(page) {
-		return window.location.href.indexOf(page) > -1;
-	}
+	var subPageNav;
+	var getSubPageNav = function(el) { return toArray(document.querySelectorAll(el)); }
+	var isPage = function(page) { return window.location.href.indexOf(page) > -1; }
 
-	if(isPage("resources")) {
-		subPageNavigation();
+	if (isPage("resources")) {
+		subPageNavigation(getSubPageNav('nav.two > a'));
 	}
 	if (isPage("committee")) {
-		subPageNavigation();
+		subPageNavigation(getSubPageNav('nav.two > a'));
 		committeePageNavigation();
 	}
 	if (isPage("contact")) {
 		contactValidation();
+	}
+	if (isPage("forms")) {
+		subPageNavigation(getSubPageNav('nav.custom2 a'));
 	}
 });

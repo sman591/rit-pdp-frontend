@@ -1,14 +1,10 @@
 .person {
 	@extend %cf;
-	padding:2em;
+	margin:2em;
 	> img {
 		float:left;
 		padding-right:1em;
 	}
-	> .position {
-		font-style:italic;
-	}
-	> .description {
-		text-indent:2em;
-	}
+	> .position { font-style:italic; }
+	> .description { text-indent:2em; }
 }

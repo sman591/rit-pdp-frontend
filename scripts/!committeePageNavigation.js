@@ -22,7 +22,7 @@ var committeePageNavigation = function () {
 	};
 
 	var nodeDisplayForEach = function(nodeList, action) {
-		return Array.prototype.forEach.call(nodeList, function(elem) {
+		return toArray(nodeList, function(elem) {
 			elem.style.display = action;
 		});
 	};
