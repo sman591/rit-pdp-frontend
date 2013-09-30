@@ -1,4 +1,5 @@
 // @prepros-prepend !contentLoaded.js
+// @prepros-prepend !accordian.js
 // @prepros-prepend !committeePageNavigation.js
 // @prepros-prepend !subPageNavigation.js
 // @prepros-prepend !contact.js
@@ -88,5 +89,8 @@ contentLoaded(window, function() {
 	}
 	if (isPage("forms")) {
 		subPageNavigation(getSubPageNav('nav.custom2 a'));
+	}
+	if(isPage("faq")) {
+		accordion();
 	}
 });

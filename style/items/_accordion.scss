@@ -1,0 +1,26 @@
+.accordion {
+	> dt {
+		cursor:pointer;
+		border-bottom:2px solid $orange;
+		font-weight:bold;
+		padding-top:.5em;
+		&:before {
+			content:'';
+			background:url("imgs/down.png") no-repeat center;
+			display:inline-block;
+			width:15px;
+			height:7px;
+			padding-right:.5em;
+			-ms-transform:rotate(270deg);
+			-webkit-transform:rotate(270deg);
+			transform:rotate(270deg);
+		}
+	}
+	> dd {
+		border:0 solid transparent;
+		transition-property:height, border, opacity;
+		-webkit-transition-property:height, border, opacity;
+		transition-duration:.5s, .5s, .75s;
+		-webkit-transition-duration:.5s, .5s, .75s;
+	}
+}
