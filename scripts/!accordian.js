@@ -1,14 +1,18 @@
 var accordion = function() {
-	var originalSize;
-	var dt = toArray(document.querySelectorAll('dt'));
-	var dd = toArray(document.querySelectorAll('dd'));
+	var originalSize,
+		dt = toArray(document.querySelectorAll('dt')),
+		dd = toArray(document.querySelectorAll('dd'));
+
 	var hide = function(i) {
 		dd[i].style.height = 0;
 		dd[i].style.fontSize = 0;
 		dd[i].style.opacity = 0;
+		removeClass(dt[i], 'open');
 	};
+
 	var sliderItenClick = function (i, originalSize) {
 		if (dd[i].style.height !== originalSize) {
+			dt[i].className += " open";
 			dd[i].style.height = originalSize;
 			dd[i].style.fontSize = '16px';
 			dd[i].style.opacity = 1;
@@ -18,8 +22,13 @@ var accordion = function() {
 	};
 
 	for (var i=0; i < dt.length; i++) { // makes the assumption that dt - dd will always be a 1-to-1 relationship
-		originalSize = dd[i].offsetHeight + 'px';
-		console.log(originalSize);
+		console.log(dd[i].clientHeight);
+		console.log(dd[i].offsetHeight);
+		console.log(dd[i].scrollHeight);
+		console.log(dd[i].getBoundingClientRect()['height']);
+
+		originalSize = dd[i].scrollHeight + 'px';
+
 		(function(dt, i, originalSize) {
 			dt[i].addEventListener('click', function() { sliderItenClick(i, originalSize); }, false);	
 		})(dt, i, originalSize);
