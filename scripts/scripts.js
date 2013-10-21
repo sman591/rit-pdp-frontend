@@ -15,7 +15,10 @@ var toArray = function (element) {
 	return Array.prototype.slice.call(element);
 }
 
-contentLoaded(window, function() {
+window.onload = function() { // a lot of people think this is bad and that I should use DOMContentLoaded
+// but they would be wrong to suggest that because some of these scripts change visual stuff on the page and it needs the style sheet
+// to be fully rendered for it. DOMContentLoaded doesn't guarantee that. window.onload does.
+	
 	// To stop stuff from animating on page load
 	document.querySelector("body").className = "";
 
@@ -93,4 +96,4 @@ contentLoaded(window, function() {
 	if(isPage("faq")) {
 		accordion();
 	}
-});
+};

@@ -35,5 +35,8 @@
 		-webkit-transition-property:height, border, opacity;
 		transition-duration:.5s, .5s, .75s;
 		-webkit-transition-duration:.5s, .5s, .75s;
+		> h4,
+		> ul,
+		> ol { margin-top:1em; }
 	}
 }

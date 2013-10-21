@@ -22,16 +22,12 @@ var accordion = function() {
 	};
 
 	for (var i=0; i < dt.length; i++) { // makes the assumption that dt - dd will always be a 1-to-1 relationship
-		console.log(dd[i].clientHeight);
-		console.log(dd[i].offsetHeight);
-		console.log(dd[i].scrollHeight);
-		console.log(dd[i].getBoundingClientRect()['height']);
-
 		originalSize = dd[i].scrollHeight + 'px';
 
 		(function(dt, i, originalSize) {
 			dt[i].addEventListener('click', function() { sliderItenClick(i, originalSize); }, false);	
 		})(dt, i, originalSize);
+		
 		hide(i);
 	}
 };
