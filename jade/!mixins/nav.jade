@@ -5,6 +5,8 @@ mixin nav(page)
 		for currentPage in pages
 			if currentPage == 'Home' 
 				lowercaseURL = 'index.html'
+			else if currentPage == 'Calendar'
+				lowercaseURL = 'calendar/index.html'
 			else
 				lowercaseURL = currentPage.toLowerCase() + '.html'
 			if currentPage == page
