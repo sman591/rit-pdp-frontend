@@ -58,7 +58,7 @@ header {
 .Blog.selected ~ .swoosh { left:436px; }
 .Contact.selected ~ .swoosh { left:511px; }
 .FAQ.selected ~ .swoosh { left:556px; }
-.FAQ:hover ~ .swoosh { left:556px; }
+
 .Home:hover ~ .swoosh { left:43px; }
 .Calendar:hover ~ .swoosh { left:128px; }
 .Committee:hover ~ .swoosh { left:227px; }
@@ -66,3 +66,4 @@ header {
 .Resources:hover ~ .swoosh { left:386px; }
 .Blog:hover ~ .swoosh { left:436px; }
 .Contact:hover ~ .swoosh { left:511px; }
+.FAQ:hover ~ .swoosh { left:556px; }
