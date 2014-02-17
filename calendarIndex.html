@@ -15,47 +15,69 @@
     <script src="fullcalendar.min.js"></script>
     <script src="scripts.min.js">		</script>
     <script type="text/javascript" src="jquery.timePicker.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      
+      
+       // page is now ready, initialize the calendar...
+       
+       var calendar = $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        //events: 'https://www.google.com/calendar/feeds/rvkgqt49saqhg4i17fo48u8uk0%40group.calendar.google.com/public/basic',
+        events: rootLoc + '/calendar/events',
+        header: {
+         left: 'prev,next today',
+         center: 'title',
+         right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end, allDay) {
+         console.log(allDay);
+         //var addevent = confirm('Would You like to add an event to this day?');
+         /*if (addEvent) {
+          calendar.fullCalendar('renderEvent',
+           {
+            title: title,
+            start: start,
+            end: end,
+            allDay: allDay
+           },
+           true // make the event "stick"
+          );
+          jQuery.post(
+           rootLoc + "/calendar/addevent" // your url
+           , { // re-use event's data
+            title: title,
+            start: start,
+            end: end,
+            allDay: allDay,
+            location: '',
+            description: ''
+           }
+          );*/
+         if(confirm('Would You like to add an event to this day?')){
+          window.location.href="calendarAddEvent.html?start=" + encodeURI(start) + "&end=" + encodeURI(end);
+         }
+         calendar.fullCalendar('unselect');
+        }
+       })
+      });
+      
+    </script>
   </head>
   <body class="preload">
     <header>
       <div class="container"><a href="index.html" class="logo"><img src="imgs/PDPLogo.png" alt="PDP Logo"></a>
         <p class="motto"><span>Pause for PD...</span>It's good for you!</p>
         <nav class="breadcrumbs"><a href="http://rit.edu" target="_blank">RIT</a><a href="http://ntid.rit.edu" target="_blank">NTID</a><a href="http://ntid.rit.edu/das" target="_blank">DAS</a><a href="http://index.html">Professional Development Program</a></nav>
-        <nav class="mainNav"><a href="index.html" class="Home">Home</a><a href="calendarIndex.html" class="Calendar">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog selected">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
+        <nav class="mainNav"><a href="index.html" class="Home">Home</a><a href="calendarIndex.html" class="Calendar selected">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
         </nav>
       </div>
     </header>
     <main>
       <div class="container">
-        <div class="block onethird">
-          <h2>About the Author</h2>
-          <div class="content"><img src="imgs/people/d_makowski.jpg" alt="Deborah Makowski Photo" class="left padright">
-            <p>Deborah is the big boss lady around these parts. She knows every deaf and hard of hearing person on the planet as well as every interpreter.</p>
-          </div>
-          <h2>Post History</h2>
-          <div class="content">
-            <ul>
-              <li>Old Post
-                <li>Older Post</li>
-                <li>Super Old Post</li>
-                <li>Older Post</li>
-                <li>Super Old Post</li>
-                <li>Load More</li>
-                <li class="more">View Older</li>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="block twothird right">
-          <h2>Deborah's Blog</h2>
-          <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, natus, doloribus eos suscipit possimus ea sit dolor culpa sunt ad cum quae placeat nam beatae rem iure hic veritatis ipsa. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, nobis, aut neque aliquid necessitatibus voluptatem et maxime nisi saepe ipsam error accusantium! Voluptatem ullam nostrum repellendus temporibus quaerat vero iste. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, velit incidunt delectus aut esse quidem architecto laboriosam suscipit culpa est tempore inventore nam dolores aliquam rerum consectetur nisi cum accusantium?</p>
-          </div>
-          <h2>Comments</h2>
-          <div class="content">
-            <p>None here yet.</p>
-          </div>
-        </div>
+        <div id="calendar" class="block full center"></div>
       </div>
     </main>
     <footer>

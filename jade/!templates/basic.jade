@@ -1,4 +1,6 @@
 include ../!mixins/nav.jade
+include ../!mixins/dropdown.jade
+
 
 !!! 5
 html(lang="en")
@@ -16,10 +18,12 @@ html(lang="en")
 		link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600')
 		link(rel="stylesheet", href="style.min.css")
 		link(rel="stylesheet", href="fullcalendar.css")
+		link(rel="stylesheet", href="timePicker.css")
 		//- JS
 		script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 		script(src="fullcalendar.min.js")
-		script(src="scripts.min.js")
+		script(src="scripts.min.js")		
+		script(type="text/javascript", src="jquery.timePicker.min.js")
 		
 		block script
 		

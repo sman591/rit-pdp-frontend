@@ -1,0 +1,19 @@
+mins = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
+hours = ["01", "02", "03", "04", "05" , "06" , "07" , "08", "09", "10", "11", "12"]
+
+mixin timeSelector(id)
+	div(id=id, class="time")
+		select(id="hour")
+			for hour in hours
+				option(value=hour)=hour
+		select(id="min")
+			for min in mins
+				option(value=min)=min
+		select(id="timeDay")
+			option(value="0")
+				"am"
+			option(value="1", selected)
+				"pm"
+
+
+			

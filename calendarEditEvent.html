@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Professional Development Program</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//google-analytics.com">
+    <link rel="icon" href="imgs/favicon.png">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600">
+    <link rel="stylesheet" href="style.min.css">
+    <link rel="stylesheet" href="fullcalendar.css">
+    <link rel="stylesheet" href="timePicker.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="fullcalendar.min.js"></script>
+    <script src="scripts.min.js">		</script>
+    <script type="text/javascript" src="jquery.timePicker.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+       var rootLoc = 'http://ntiddaspdptest.csh.rit.edu:6543'
+       $( "#editEventForm" ).submit(function( event ) {
+        // Stop form from submitting normally
+        event.preventDefault();
+        
+        // Get some values from elements on the page:
+        var $form = $( this );
+        var title = $form.find( "input[id='title']" ).val();
+        var loc = $form.find( "input[id='loc']" ).val();
+        var start = $form.find( "input[id='startTime']" ).val();
+        var end = $form.find( "input[id='endTime']" ).val();
+        var des = $form.find( "input[id='description']" ).val();
+        var dataString = 'title='+ title;
+        dataString += '&location='+ loc;
+        dataString += '&start='+ start;
+        dataString += '&end='+ end;
+        dataString += '&description=' + des;
+        /*
+        $.ajax({
+         type: "POST",
+         url: rootLoc + "/calendar/addevent",
+         data: dataString,
+         cache: false,
+         success: function(result) {
+          console.log("Event Added!");
+         },
+         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+          console.log("Status: " + textStatus); 
+          console.log("Error: " + errorThrown); 
+         }
+        });*/
+        jQuery.post(
+         rootLoc + "/calendar/addevent" // your url
+         , { // re-use event's data
+          title: title,
+          start: start,
+          end: end,
+          allDay: false,
+          location: "",
+          description: ""
+         }
+        );				
+       });
+      });
+      
+    </script>
+  </head>
+  <body class="preload">
+    <header>
+      <div class="container"><a href="index.html" class="logo"><img src="imgs/PDPLogo.png" alt="PDP Logo"></a>
+        <p class="motto"><span>Pause for PD...</span>It's good for you!</p>
+        <nav class="breadcrumbs"><a href="http://rit.edu" target="_blank">RIT</a><a href="http://ntid.rit.edu" target="_blank">NTID</a><a href="http://ntid.rit.edu/das" target="_blank">DAS</a><a href="http://index.html">Professional Development Program</a></nav>
+        <nav class="mainNav"><a href="index.html" class="Home">Home</a><a href="calendarIndex.html" class="Calendar selected">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="block onehalf center">
+          <h2>Modify Event</h2>
+          <form id="editEventForm" class="content center">
+            <label for="title">Event Title:<span id="titleError" class="error">Please enter an event title</span></label>
+            <input type="text" id="title" placeholder="Team Status Meeting">
+            <label for="loc">Event Location:<span id="locError" class="error">Please enter an event location</span></label>
+            <input type="text" id="loc" placeholder="Sundial">
+            <label for="startTime">Start Time:<span id="startTimeError" class="error">Please enter an event start time</span></label>
+            <input type="text" id="startTime" placeholder="Enter text in the format 03:35PM" class="time">
+            <label for="endTime">End Time:<span id="endTimeError" class="error">Please enter an event end time</span></label>
+            <input type="text" id="endTime" placeholder="Enter text in the format 04:35PM" class="time">
+            <label for="description">Event Description:<span id="descriptionError" class="error">Required Field</span></label>
+            <textarea id="description" rows="6" placeholder="Quick stand up meeting to report the status of our current projects"></textarea>
+            <input type="submit" id="submitButton" value="Send">
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="left"><a href="http://rit.edu" target="_blank">Rochester Institute of Technology</a><a href="http://ntid.rit.edu" target="_blank">National Technical Institute for the Deaf</a><a href="http://ntid.rit.edu/das" target="_blank">Deartment of Access Services</a>
+          <p>&copy; 2013</p>
+        </div>
+        <div class="logos"><a href="http://www.rid.org/" target="_blank"><img src="imgs/RID.png" alt="RID logo"></a><a href="http://www.rid.org/education/index.cfm/AID/99" target="_blank"><img src="imgs/ACET.png" alt="ACET logo"></a>
+          <div class="interpretek">
+            <p>Our Sponsor:</p><a href="http://www.interpretek.com" target="_blank"><img src="imgs/interpretek.png" alt="Interpretek logo"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
