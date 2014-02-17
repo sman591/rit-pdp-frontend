@@ -17,7 +17,22 @@
     <script type="text/javascript" src="jquery.timePicker.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-       var rootLoc = 'http://ntiddaspdptest.csh.rit.edu:6543'
+       $.ajax({
+         type: "POST",
+         url: rootLoc + "/calendar/getevent"
+         data: "event_uid=" + getQueryVariable("event"),
+         cache: false,
+         success: function(result) {
+          console.log(result);
+         },
+         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+          console.log("Status: " + textStatus); 
+          console.log("Error: " + errorThrown); 
+         }
+       });
+       
+       
+       
        $( "#editEventForm" ).submit(function( event ) {
         // Stop form from submitting normally
         event.preventDefault();
