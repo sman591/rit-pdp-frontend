@@ -123,7 +123,7 @@ html .fc,
 	}
 	
 .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> fcf8e3*/
-	background: #c9c6b5;
+	background: #eae3bf;
 	}
 	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
@@ -408,16 +408,16 @@ table.fc-border-separate {
 	/* opacity with small font can sometimes look too faded
 	   might want to set the 'color' property instead
 	   making day-numbers bold also fixes the problem */
-	background-color: #AAABA7;
+	background-color: #e2dfcc;
 	}
 
-.fc-other-month div{
+.fc-other-month{
 	opacity: 0.8;
 	filter: alpha(opacity=80); /* for IE */
 	/* opacity with small font can sometimes look too faded
 	   might want to set the 'color' property instead
 	   making day-numbers bold also fixes the problem */
-	background-color: #AAABA7;
+	background-color: #e2dfcc;
 
 }
 	
