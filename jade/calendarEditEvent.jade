@@ -4,10 +4,12 @@ block script
 	script(type='text/javascript')
 		$(document).ready(function() {
 			
+			console.log(getQueryVariable("event"));
+
 			$.ajax({
 					type: "POST",
-					url: rootLoc + "/calendar/getevent"
-					data: "event_uid=" + getQueryVariable("event"),
+					url: rootLoc + "/calendar/getevent",
+					data: "event_uid=5",
 					cache: false,
 					success: function(result) {
 						console.log(result);
