@@ -410,6 +410,16 @@ table.fc-border-separate {
 	   making day-numbers bold also fixes the problem */
 	background-color: #AAABA7;
 	}
+
+.fc-other-month div{
+	opacity: 0.8;
+	filter: alpha(opacity=80); /* for IE */
+	/* opacity with small font can sometimes look too faded
+	   might want to set the 'color' property instead
+	   making day-numbers bold also fixes the problem */
+	background-color: #AAABA7;
+
+}
 	
 .fc-grid .fc-day-content {
 	clear: both;
