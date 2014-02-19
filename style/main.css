@@ -4,7 +4,7 @@
   clear: both;
 }
 
-input, textarea, .time, .error, .block, .container {
+input, textarea, select, .error, .block, .container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -392,7 +392,7 @@ label {
   color: white;
 }
 
-input, textarea, .time {
+input, textarea, select {
   border-radius: 3px;
   background: #eeedd6;
   position: relative;
@@ -406,7 +406,7 @@ input, textarea, .time {
   transition: border-color 0.5s;
 }
 
-input:focus, textarea:focus, .time:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #513127;
 }
@@ -627,6 +627,18 @@ strong.italics {
 
 .full {
   width: 100%;
+}
+
+.orange {
+  color: #f36e21;
+}
+
+.brown {
+  color: #513127;
+}
+
+.blue {
+  color: #0e2aa6;
 }
 
 .container {

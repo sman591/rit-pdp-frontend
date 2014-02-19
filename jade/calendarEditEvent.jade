@@ -5,6 +5,7 @@ block script
 		$(document).ready(function() {
 			
 			var eventId = getQueryVariable("event");
+			$('.time').datetimepicker();
 
 			$.ajax({
 					type: "POST",
@@ -19,7 +20,6 @@ block script
 						console.log("Error: " + errorThrown); 
 					}
 				});
-
 
 
 			$( "#editEventForm" ).submit(function( event ) {
@@ -82,13 +82,29 @@ block main
 				span#locError.error Please enter an event location
 			input(type='text', id='loc', placeholder="Sundial")
 
-			label(for='startTime') Start Time:
+			label(for='startTime') Event Start Time:
 				span#startTimeError.error Please enter an event start time
 			input(type='text', id='startTime', class='time', placeholder="Enter text in the format 03:35PM")
 
-			label(for='endTime') End Time:
+			label(for='endTime') Event End Time:
 				span#endTimeError.error Please enter an event end time
 			input(type='text', id='endTime', class='time', placeholder="Enter text in the format 04:35PM")
+
+			label(for='startTimeReg') Registration Start Time:
+				span#startTimeError.error Please enter an event start time
+			input(type='text', id='startTimeReg', class='time', placeholder="Enter text in the format 03:35PM")
+
+			label(for='endTimeReg') Registration End Time:
+				span#endTimeError.error Please enter an event end time
+			input(type='text', id='endTimeReg', class='time', placeholder="Enter text in the format 04:35PM")
+
+			label(for='startTimeApprove') Approval Start Time:
+				span#startTimeError.error Please enter an event start time
+			input(type='text', id='startTimeApprove', class='time', placeholder="Enter text in the format 03:35PM")
+
+			label(for='endTimeApprove') Approval End Time:
+				span#endTimeError.error Please enter an event end time
+			input(type='text', id='endTimeApprove', class='time', placeholder="Enter text in the format 04:35PM")
 
 			label(for='description') Event Description:
 				span#descriptionError.error Required Field

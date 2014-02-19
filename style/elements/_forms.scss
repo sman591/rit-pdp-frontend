@@ -10,7 +10,7 @@ label {
 	padding-left:5px;
 	color:white;
 }
-input, textarea, .time {
+input, textarea, select {
 	@extend %border-box;
 	border-radius:3px;
 	background:$highlight;
@@ -23,7 +23,7 @@ input, textarea, .time {
 	padding:5px;
 	@include transition(border-color);
 }
-input:focus, textarea:focus, .time:focus {
+input:focus, textarea:focus, select:focus {
 	outline:none;
 	border-color:$brown;
 }
