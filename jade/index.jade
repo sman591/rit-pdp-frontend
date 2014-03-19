@@ -1,5 +1,36 @@
 extends !templates/basic.jade
 
+block script
+	script(type='text/javascript')
+		$(document).ready(function() {
+			var date = new Date();
+			var curr_date = date.getDate();
+			var curr_month = date.getMonth() + 1; //Months are zero based
+			var curr_year = date.getFullYear();
+			var formatted = (curr_month + "/" +  curr_date + "/" + curr_year + " 12:00 AM");
+			console.log(formatted);
+
+			var dataString = "start=" + formatted;
+			dataString += '&n='+ 5;
+			$.ajax({
+					type: "POST",
+					url: rootLoc + "/calendar/get_n_events",
+					data: dataString,
+					cache: false,
+					success: function(result) {
+						result = $.parseJSON(result);
+						console.log(result);
+						$(".events").html("");
+						for (var i = 0; i < result.length; ++i) {
+							$(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+							$(".events").append("<li>Location: " + result[i]['location'] + "</li>");
+							$(".events").append("<li>Description: " + result[i]['description'] + "</li>");
+						}
+
+					},
+				});
+		});
+
 block nav
 	mixin nav('Home')
 
@@ -11,8 +42,8 @@ block main
 		//- p.content.important.
 		//- 	A deadline is approaching! Do the thing you have to do before the deadline
 		
-		h2 Recent &amp; Upcoming Events
-		ul.content
+		h2 Upcoming Events
+		ul.content.events
 			li.topic xxxxday, Month xx
 			li This should autopopulate from the calendar
 			li Because it would be obnoxious to have to write this by hand every week and a half or so
@@ -39,3 +70,4 @@ block main
 		//- 		span.error Password incorrect
 		//- 	input(type='password', id='username')
 		//- 	input(type='submit')
+		

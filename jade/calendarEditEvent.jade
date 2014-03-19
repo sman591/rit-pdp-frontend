@@ -14,13 +14,40 @@ block script
 					cache: false,
 					success: function(result) {
 						console.log(result);
+						result = $.parseJSON(result);
+						console.log(typeof result);
+						console.log(result["title"]);
+						console.log(result['location']);
+						console.log(result['start']);
+						console.log(result['end']);
+						console.log(result['registration_start']);
+						console.log(result['registration_end']);
+						console.log(result['approval_start']);
+						console.log(result['approval_end']);
+						console.log(result['description']);
+
+						//Prefill the boxes
+						var form = $( "#editEventForm" );
+						form.find( "input[id='title']" ).val(result['title']);
+						form.find( "input[id='loc']" ).val(result['location']);
+						form.find( "input[id='startTime']" ).val(result['start']);
+						form.find( "input[id='endTime']" ).val(result['end']);
+						form.find( "input[id='startTimeReg']" ).val(result['registration_start']);
+						form.find( "input[id='endTimeReg']" ).val(result['registration_end']);
+						form.find( "input[id='startTimeApprove']" ).val(result['approval_start']);
+						form.find( "input[id='endTimeApprove']" ).val(result['registration_end']);
+						$("#description" ).val(result['description']);
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) { 
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
 				});
-
+			$( "#deleteEventForm" ).submit(function( event ) {
+				if(confirm('Would You like to delete this event?')){
+					window.location.href="calendarIndex.html";
+				}
+			});
 
 			$( "#editEventForm" ).submit(function( event ) {
 				// Stop form from submitting normally
@@ -32,41 +59,43 @@ block script
 				var loc = $form.find( "input[id='loc']" ).val();
 				var start = $form.find( "input[id='startTime']" ).val();
 				var end = $form.find( "input[id='endTime']" ).val();
-				var des = $form.find( "input[id='description']" ).val();
+				var startReg = $form.find( "input[id='startTimeReg']" ).val();
+				var endReg = $form.find( "input[id='endTimeReg']" ).val();
+				var startApprove = $form.find( "input[id='startTimeApprove']" ).val();
+				var endApprove = $form.find( "input[id='endTimeApprove']" ).val();
+				var des = $("#description").val();
+
+				console.log($("#description" ).val());
 				
 				var dataString = 'title='+ title;
 				dataString += '&location='+ loc;
 				dataString += '&start='+ start;
 				dataString += '&end='+ end;
+				dataString += '&registration_start='+ startReg;
+				dataString += '&registration_end='+ endReg;
+				dataString += '&approval_start='+ startApprove;
+				dataString += '&approval_end='+ endApprove;
 				dataString += '&description=' + des;
-				/*
+				dataString += '&event_uid=' + eventId;
+				
+				console.log("Sending out: " + dataString);
+
 				$.ajax({
 					type: "POST",
-					url: rootLoc + "/calendar/addevent",
+					url: rootLoc + "/calendar/modify_event",
 					data: dataString,
 					cache: false,
 					success: function(result) {
-						console.log("Event Added!");
+						console.log("Event Fixed!");
+						window.location.href="calendarIndex.html";
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) { 
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
-				});*/
-				jQuery.post(
-					rootLoc + "/calendar/addevent" // your url
-					, { // re-use event's data
-						title: title,
-						start: start,
-						end: end,
-						allDay: false,
-						location: "",
-						description: ""
-					}
-				);				
+				});	
 			});
 		});
-
 block nav
 	+nav('Calendar')
 
@@ -110,6 +139,8 @@ block main
 				span#descriptionError.error Required Field
 			textarea(id='description', rows='6', placeholder="Quick stand up meeting to report the status of our current projects")
 
-			input(type='submit', id='submitButton', value='Send')
+			input(type='submit', id='submitButton', value='Save')
 
+		form#deleteEventForm.content.center
+			input(type='submit', id='submitButton', value='Delete Event')
 		

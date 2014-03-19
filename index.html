@@ -18,6 +18,37 @@
     <script type="text/javascript" src="../time/moment.min.js"></script>
     <script type="text/javascript" src="../time/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../time/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+       var date = new Date();
+       var curr_date = date.getDate();
+       var curr_month = date.getMonth() + 1; //Months are zero based
+       var curr_year = date.getFullYear();
+       var formatted = (curr_month + "/" +  curr_date + "/" + curr_year + " 12:00 AM");
+       console.log(formatted);
+       
+       var dataString = "start=" + formatted;
+       dataString += '&n='+ 5;
+       $.ajax({
+         type: "POST",
+         url: rootLoc + "/calendar/get_n_events",
+         data: dataString,
+         cache: false,
+         success: function(result) {
+          result = $.parseJSON(result);
+          console.log(result);
+          $(".events").html("");
+          for (var i = 0; i < result.length; ++i) {
+           $(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+           $(".events").append("<li>Location: " + result[i]['location'] + "</li>");
+           $(".events").append("<li>Description: " + result[i]['description'] + "</li>");
+          }
+          
+         },
+       });
+      });
+      
+    </script>
   </head>
   <body class="preload">
     <header>
@@ -31,8 +62,8 @@
     <main>
       <div class="container">
         <div class="block twothird">
-          <h2>Recent &amp; Upcoming Events</h2>
-          <ul class="content">
+          <h2>Upcoming Events</h2>
+          <ul class="content events">
             <li class="topic">xxxxday, Month xx</li>
             <li>This should autopopulate from the calendar</li>
             <li>Because it would be obnoxious to have to write this by hand every week and a half or so</li>
