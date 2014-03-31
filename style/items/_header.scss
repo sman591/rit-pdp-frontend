@@ -29,7 +29,7 @@ header {
 	> a {
 		&:not(:last-child):after {
 			content:'\00BB'; // » character
-			margin:0 .5em;
+			margin:0 .5em; 
 		}
 	}
 }
@@ -50,20 +50,20 @@ header {
 	@include transition(left);
 	z-index:0;
 }
-.Home.selected ~ .swoosh { left:43px; }
-.Calendar.selected ~ .swoosh { left:128px; }
-.Committee.selected ~ .swoosh { left:227px; }
-.Forms.selected ~ .swoosh { left:291px; }
-.Resources.selected ~ .swoosh { left:386px; }
-.Blog.selected ~ .swoosh { left:436px; }
-.Contact.selected ~ .swoosh { left:511px; }
-.FAQ.selected ~ .swoosh { left:556px; }
+.Home.selected ~ .swoosh { left:41px; }
+.Calendar.selected ~ .swoosh { left:122px; }
+.Committee.selected ~ .swoosh { left:215px; }
+.Forms.selected ~ .swoosh { left:275px; }
+.Resources.selected ~ .swoosh { left:367px; }
+.Blog.selected ~ .swoosh { left:415px; }
+.Contact.selected ~ .swoosh { left:485px; }
+.FAQ.selected ~ .swoosh { left:533px; }
 
-.Home:hover ~ .swoosh { left:43px; }
-.Calendar:hover ~ .swoosh { left:128px; }
-.Committee:hover ~ .swoosh { left:227px; }
-.Forms:hover ~ .swoosh { left:291px; }
-.Resources:hover ~ .swoosh { left:386px; }
-.Blog:hover ~ .swoosh { left:436px; }
-.Contact:hover ~ .swoosh { left:511px; }
-.FAQ:hover ~ .swoosh { left:556px; }
+.Home:hover ~ .swoosh { left:41px; }
+.Calendar:hover ~ .swoosh { left:122px; }
+.Committee:hover ~ .swoosh { left:215px; }
+.Forms:hover ~ .swoosh { left:275px; }
+.Resources:hover ~ .swoosh { left:367px; }
+.Blog:hover ~ .swoosh { left:415px; }
+.Contact:hover ~ .swoosh { left:485px; }
+.FAQ:hover ~ .swoosh { left:533px; }
