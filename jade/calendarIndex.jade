@@ -20,28 +20,6 @@ block script
 				selectHelper: true,
 				select: function(start, end, allDay) {
 					console.log(allDay);
-					//var addevent = confirm('Would You like to add an event to this day?');
-					/*if (addEvent) {
-						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay
-							},
-							true // make the event "stick"
-						);
-						jQuery.post(
-							rootLoc + "/calendar/addevent" // your url
-							, { // re-use event's data
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay,
-								location: '',
-								description: ''
-							}
-						);*/
 					if(confirm('Would You like to add an event to this day?')){
 						window.location.href="calendarAddEvent.html?start=" + encodeURI(start) + "&end=" + encodeURI(end);
 					}

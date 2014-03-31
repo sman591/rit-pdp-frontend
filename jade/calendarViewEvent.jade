@@ -5,6 +5,14 @@ block script
 		$(document).ready(function() {
 			
 			var eventId = getQueryVariable("event");
+			
+			$( "#modifyEventForm" ).submit(function( event ) {
+				event.preventDefault();
+				var sendId = getQueryVariable("event");
+				if(confirm('Would You like to modify this event?')){					
+					window.location="/calendarEditEvent.html?event=" +  encodeURI(sendId);
+				}
+			});
 
 			$.ajax({
 					type: "POST",
@@ -26,22 +34,24 @@ block script
 						console.log(result['description']);
 
 						//Prefill the boxes
-						var form = $( "#editEventForm" );
-						form.find( "p[id='title']" ).val(result['title']);
-						form.find( "p[id='loc']" ).val(result['location']);
-						form.find( "p[id='startTime']" ).val(result['start']);
-						form.find( "p[id='endTime']" ).val(result['end']);
-						form.find( "p[id='startTimeReg']" ).val(result['registration_start']);
-						form.find( "p[id='endTimeReg']" ).val(result['registration_end']);
-						form.find( "p[id='startTimeApprove']" ).val(result['approval_start']);
-						form.find( "p[id='endTimeApprove']" ).val(result['registration_end']);
-						$("#description" ).val(result['description']);
+						$("#title").html(result['title']);
+						$("#loc").html(result['location']);
+						$("#startTime").html(result['start']);
+						$("#endTime").html(result['end']);
+						$("#startTimeReg").html(result['registration_start']);
+						$("#endTimeReg").html(result['registration_end']);
+						$("#startTimeApprove").html(result['approval_start']);
+						$("#endTimeApprove").html(result['registration_end']);
+						$("#description").html(result['description']);
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) { 
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
-				});
+				});			
+		});
+		
+
 			
 block nav
 	+nav('Calendar')
@@ -49,30 +59,37 @@ block nav
 block main
 	div.block.onehalf.center
 		h2 View Event
-		form.content.center
-			label(for='title') Event Title:
-			p(id='title')
+		div.content.center
+			form#modifyEventForm.content.center
+				input(type='submit', id='submitButton', value='Modify Event')
 
-			label(for='loc') Event Location:
-			p(id='loc')
+				br
+				br
 
-			label(for='startTime') Event Start Time:
-			p(id='startTime')
+				label(for='title') Event Title:
+				p(id='title', class='viewPage')
 
-			label(for='endTime') Event End Time:
-			p(id='endTime')
+				label(for='loc') Event Location:
+				p(id='loc', class='viewPage')
 
-			label(for='startTimeReg') Registration Start Time:
-			p(id='startTimeReg')
+				label(for='startTime') Event Start Time:
+				p(id='startTime', class='viewPage')
 
-			label(for='endTimeReg') Registration End Time:
-			p(id='endTimeReg')
+				label(for='endTime') Event End Time:
+				p(id='endTime', class='viewPage')
 
-			label(for='startTimeApprove') Approval Start Time:
-			p(id='startTimeApprove')
+				label(for='startTimeReg') Registration Start Time:
+				p(id='startTimeReg', class='viewPage')
 
-			label(for='endTimeApprove') Approval End Time:
-			p(id='endTimeApprove')
+				label(for='endTimeReg') Registration End Time:
+				p(id='endTimeReg', class='viewPage')
 
-			label(for='description') Event Description:
-			p(id='description')
+				label(for='startTimeApprove') Approval Start Time:
+				p(id='startTimeApprove', class='viewPage')
+
+				label(for='endTimeApprove') Approval End Time:
+				p(id='endTimeApprove', class='viewPage')
+
+				label(for='description') Event Description:
+				p(id='description', class='viewPage')
+

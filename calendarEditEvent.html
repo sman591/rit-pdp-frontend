@@ -59,9 +59,24 @@
           console.log("Error: " + errorThrown); 
          }
        });
+       
        $( "#deleteEventForm" ).submit(function( event ) {
+        event.preventDefault();
         if(confirm('Would You like to delete this event?')){
-         window.location.href="calendarIndex.html";
+         $.ajax({
+          type: "POST",
+          url: rootLoc + "/calendar/delete_event",
+          data: "event_uid=" + eventId,
+          cache: false,
+          success: function(result) {
+           console.log(result);
+           window.location.href="calendarIndex.html";
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) { 
+           console.log("Status: " + textStatus); 
+           console.log("Error: " + errorThrown); 
+          }
+         });
         }
        });
        

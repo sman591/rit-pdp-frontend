@@ -37,13 +37,21 @@
          success: function(result) {
           result = $.parseJSON(result);
           console.log(result);
-          $(".events").html("");
-          for (var i = 0; i < result.length; ++i) {
-           $(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
-           $(".events").append("<li>Location: " + result[i]['location'] + "</li>");
-           $(".events").append("<li>Description: " + result[i]['description'] + "</li>");
-          }
           
+          if (result.length == 0){
+           //Pads the event box with content so it doesn't look weird if there is ever no content
+           $(".events").html("");
+           $(".events").append("<li class='topic'> No currently listed events!</li>");
+           $(".events").append("<li>Unfourtunately no events are currently listed.  Sorry for the inconvenience.<br/><br/><br/><br/><br/><br/><br/></li>");
+           console.log("inside");
+          }else{
+           $(".events").html("");
+           for (var i = 0; i < result.length; ++i) {
+            $(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+            $(".events").append("<li>Location: " + result[i]['location'] + "</li>");
+            $(".events").append("<li>Description: " + result[i]['description'] + "</li>");
+           }
+          }
          },
        });
       });

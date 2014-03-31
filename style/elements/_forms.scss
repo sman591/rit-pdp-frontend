@@ -10,7 +10,7 @@ label {
 	padding-left:5px;
 	color:white;
 }
-input, textarea, select {
+.viewPage, input, textarea, select {
 	@extend %border-box;
 	border-radius:3px;
 	background:$highlight;

@@ -21,6 +21,13 @@
     <script type="text/javascript">
       $(document).ready(function() {
        var eventId = getQueryVariable("event");
+       $( "#modifyEventForm" ).submit(function( event ) {
+        event.preventDefault();
+        var sendId = getQueryVariable("event");
+        if(confirm('Would You like to modify this event?')){					
+         window.location="/calendarEditEvent.html?event=" +  encodeURI(sendId);
+        }
+       });
        
        $.ajax({
          type: "POST",
@@ -42,22 +49,23 @@
           console.log(result['description']);
           
           //Prefill the boxes
-          var form = $( "#editEventForm" );
-          form.find( "p[id='title']" ).val(result['title']);
-          form.find( "p[id='loc']" ).val(result['location']);
-          form.find( "p[id='startTime']" ).val(result['start']);
-          form.find( "p[id='endTime']" ).val(result['end']);
-          form.find( "p[id='startTimeReg']" ).val(result['registration_start']);
-          form.find( "p[id='endTimeReg']" ).val(result['registration_end']);
-          form.find( "p[id='startTimeApprove']" ).val(result['approval_start']);
-          form.find( "p[id='endTimeApprove']" ).val(result['registration_end']);
-          $("#description" ).val(result['description']);
+          $("#title").html(result['title']);
+          $("#loc").html(result['location']);
+          $("#startTime").html(result['start']);
+          $("#endTime").html(result['end']);
+          $("#startTimeReg").html(result['registration_start']);
+          $("#endTimeReg").html(result['registration_end']);
+          $("#startTimeApprove").html(result['approval_start']);
+          $("#endTimeApprove").html(result['registration_end']);
+          $("#description").html(result['description']);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) { 
           console.log("Status: " + textStatus); 
           console.log("Error: " + errorThrown); 
          }
-       });
+       });			
+      });
+      
     </script>
   </head>
   <body class="preload">
@@ -73,26 +81,29 @@
       <div class="container">
         <div class="block onehalf center">
           <h2>View Event</h2>
-          <form class="content center">
-            <label for="title">Event Title:</label>
-            <p id="title"></p>
-            <label for="loc">Event Location:</label>
-            <p id="loc"></p>
-            <label for="startTime">Event Start Time:</label>
-            <p id="startTime"></p>
-            <label for="endTime">Event End Time:</label>
-            <p id="endTime"></p>
-            <label for="startTimeReg">Registration Start Time:</label>
-            <p id="startTimeReg"></p>
-            <label for="endTimeReg">Registration End Time:</label>
-            <p id="endTimeReg"></p>
-            <label for="startTimeApprove">Approval Start Time:</label>
-            <p id="startTimeApprove"></p>
-            <label for="endTimeApprove">Approval End Time:</label>
-            <p id="endTimeApprove"></p>
-            <label for="description">Event Description:</label>
-            <p id="description"></p>
-          </form>
+          <div class="content center">
+            <form id="modifyEventForm" class="content center">
+              <input type="submit" id="submitButton" value="Modify Event"><br><br>
+              <label for="title">Event Title:</label>
+              <p id="title" class="viewPage"></p>
+              <label for="loc">Event Location:</label>
+              <p id="loc" class="viewPage"></p>
+              <label for="startTime">Event Start Time:</label>
+              <p id="startTime" class="viewPage"></p>
+              <label for="endTime">Event End Time:</label>
+              <p id="endTime" class="viewPage"></p>
+              <label for="startTimeReg">Registration Start Time:</label>
+              <p id="startTimeReg" class="viewPage"></p>
+              <label for="endTimeReg">Registration End Time:</label>
+              <p id="endTimeReg" class="viewPage"></p>
+              <label for="startTimeApprove">Approval Start Time:</label>
+              <p id="startTimeApprove" class="viewPage"></p>
+              <label for="endTimeApprove">Approval End Time:</label>
+              <p id="endTimeApprove" class="viewPage"></p>
+              <label for="description">Event Description:</label>
+              <p id="description" class="viewPage"></p>
+            </form>
+          </div>
         </div>
       </div>
     </main>
