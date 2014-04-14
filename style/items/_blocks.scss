@@ -6,11 +6,29 @@
 	background-color:white;
 	.content { margin:2em; }
 	ul, ol {
-		> li:not(.topic) { margin-left:1.75em; }
-		> .topic {
+		> li.topic {
 			font-weight:bold;
 			list-style:none;
+			margin-left:0em;
 		}
+
+		> li.sub {
+			margin-left:3.5em;
+		}
+
+		//> li:not(.topic), li:not(.sub), 
+		> li.subTop {
+			@extend .topic;
+			margin-left:1.75em;
+		}
+
+		> li.item { 
+			margin-left:1.75em; 
+		}	
+
+		> li { 
+			margin-left:1.75em; 
+		}		
 	}
 	> .important { color:$orange; }
 }

@@ -5,13 +5,41 @@ block script
 		$(document).ready(function() {
 			
 			var eventId = getQueryVariable("event");
-			
+			var userId = 1;
+
 			$( "#modifyEventForm" ).submit(function( event ) {
 				event.preventDefault();
 				var sendId = getQueryVariable("event");
 				if(confirm('Would You like to modify this event?')){					
 					window.location="/calendarEditEvent.html?event=" +  encodeURI(sendId);
 				}
+			});
+
+			$( "#register" ).click(function( event ) {
+				event.preventDefault();
+
+				var dataString = 'event_uid='+ eventId;
+				dataString += '&uid='+ userId;
+
+				$.ajax({
+					type: "POST",
+					url: rootLoc + "/calendar/getevent",
+					data: dataString,
+					cache: false,
+					success: function(result) {
+						window.location="/userMyAccount.html"
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) { 
+						console.log("Status: " + textStatus); 
+						console.log("Error: " + errorThrown); 
+					}
+				});		
+						
+				
+			});
+
+			$("#back").click(function(event){
+				window.history.go(-1);
 			});
 
 			$.ajax({
@@ -61,6 +89,11 @@ block main
 		h2 View Event
 		div.content.center
 			form#modifyEventForm.content.center
+				input(type='button', id='back', value='Back')
+
+				br
+				br
+
 				input(type='submit', id='submitButton', value='Modify Event')
 
 				br
@@ -92,4 +125,6 @@ block main
 
 				label(for='description') Event Description:
 				p(id='description', class='viewPage')
+
+				input(type='button', id='register', value='Register for this Event')
 

@@ -13,31 +13,25 @@ block script
 			var dataString = "start=" + formatted;
 			dataString += '&n='+ 5;
 			$.ajax({
-					type: "POST",
-					url: rootLoc + "/calendar/get_n_events",
-					data: dataString,
-					cache: false,
-					success: function(result) {
-						result = $.parseJSON(result);
-						console.log(result);
+				type: "POST",
+				url: rootLoc + "/calendar/get_n_events",
+				data: dataString,
+				cache: false,
+				success: function(result) {
+					result = $.parseJSON(result);
+					console.log(result);
 
-						if (result.length == 0){
-							//Pads the event box with content so it doesn't look weird if there is ever no content
-							$(".events").html("");
-							$(".events").append("<li class='topic'> No currently listed events!</li>");
-							$(".events").append("<li>Unfourtunately no events are currently listed.  Sorry for the inconvenience.<br/><br/><br/><br/><br/><br/><br/></li>");
-							console.log("inside");
-						}else{
-							$(".events").html("");
-							for (var i = 0; i < result.length; ++i) {
-								$(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
-								$(".events").append("<li>Location: " + result[i]['location'] + "</li>");
-								$(".events").append("<li>Description: " + result[i]['description'] + "</li>");
-							}
+					if (result.length != 0){
+						$(".events").html("");
+						for (var i = 0; i < result.length; ++i) {
+							$(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+							$(".events").append("<li>Location: " + result[i]['location'] + "</li>");
+							$(".events").append("<li>Description: " + result[i]['description'] + "</li>");
 						}
-					},
-				});
-		});
+					}
+				},
+			});
+		}); 
 
 block nav
 	mixin nav('Home')
@@ -52,19 +46,15 @@ block main
 		
 		h2 Upcoming Events
 		ul.content.events
-			li.topic xxxxday, Month xx
-			li This should autopopulate from the calendar
-			li Because it would be obnoxious to have to write this by hand every week and a half or so
-			li.topic xxxxday, Month xx
-			li But I do think it should list a week and a half ahead of the current department
-			li.topic xxxxday, Month xx
-			li And then repopulate every week so there's a half week of overlap always
-			li.topic xxxxday, Month xx
-			li I hope that it will be at least this long
-			li Otherwise it looks a little funny
-			li Nothing breaks no matter how long/short it looks but it just looks funny
-			li Basically, it needs to be just longer than the mission statement to not look funny
-
+			li.topic No currently listed events!
+			li Unfourtunately no events are currently listed.  Sorry for the inconvenience.
+			br
+			br
+			br
+			br
+			br
+			br
+	
 	div.block.onethird.right
 		h2 Mission Statement
 		p.content.

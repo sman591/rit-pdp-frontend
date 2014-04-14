@@ -22,6 +22,10 @@ block script
 				console.log("Start Greater");
 			}
 
+			$("#back").click(function(event){
+				window.history.go(-1);
+			});
+
 			console.log("Trans: " + translatedStart);
 			console.log("Trans: " + translatedEnd);
 
@@ -79,6 +83,11 @@ block main
 	div.block.onehalf.center
 		h2 Add Event
 		form#addEventForm.content.center
+			input(type='button', id='back', value='Back')
+
+			br
+			br
+				
 			label(for='title') Event Title:
 				span#titleError.error Please enter an event title
 			input(type='text', id='title', placeholder="Team Status Meeting")

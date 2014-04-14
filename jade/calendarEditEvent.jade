@@ -7,6 +7,8 @@ block script
 			var eventId = getQueryVariable("event");
 			$('.time').datetimepicker();
 
+
+
 			$.ajax({
 					type: "POST",
 					url: rootLoc + "/calendar/getevent",
@@ -42,7 +44,7 @@ block script
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
-				});
+				}); 
 
 			$( "#deleteEventForm" ).submit(function( event ) {
 				event.preventDefault();

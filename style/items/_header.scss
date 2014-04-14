@@ -50,20 +50,34 @@ header {
 	@include transition(left);
 	z-index:0;
 }
-.Home.selected ~ .swoosh { left:41px; }
-.Calendar.selected ~ .swoosh { left:122px; }
-.Committee.selected ~ .swoosh { left:215px; }
-.Forms.selected ~ .swoosh { left:275px; }
-.Resources.selected ~ .swoosh { left:367px; }
-.Blog.selected ~ .swoosh { left:415px; }
-.Contact.selected ~ .swoosh { left:485px; }
-.FAQ.selected ~ .swoosh { left:533px; }
 
-.Home:hover ~ .swoosh { left:41px; }
-.Calendar:hover ~ .swoosh { left:122px; }
-.Committee:hover ~ .swoosh { left:215px; }
-.Forms:hover ~ .swoosh { left:275px; }
-.Resources:hover ~ .swoosh { left:367px; }
-.Blog:hover ~ .swoosh { left:415px; }
-.Contact:hover ~ .swoosh { left:485px; }
-.FAQ:hover ~ .swoosh { left:533px; }
+$home:41px;
+$account:97px;
+$calendar:80px;
+$commitee:93px;
+$forms:60px;
+$res:92px;
+$blog:48px;
+$contact:70px;
+$faq:48px;
+
+
+.Home.selected ~ .swoosh { left:$home; }
+.MyAccount.selected ~ .swoosh { left:($home + $account); }
+.Calendar.selected ~ .swoosh { left:($home + $account + $calendar); }
+.Committee.selected ~ .swoosh { left:($home + $account + $calendar + $commitee); }
+.Forms.selected ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms); }
+.Resources.selected ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res); }
+.Blog.selected ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog); }
+.Contact.selected ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog + $contact); }
+.FAQ.selected ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog + $contact + $faq); }
+
+.Home:hover ~ .swoosh { left:$home; }
+.MyAccount:hover ~ .swoosh { left:($home + $account); }
+.Calendar:hover ~ .swoosh { left:($home + $account + $calendar); }
+.Committee:hover ~ .swoosh { left:($home + $account + $calendar + $commitee); }
+.Forms:hover ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms); }
+.Resources:hover ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res); }
+.Blog:hover ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog); }
+.Contact:hover ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog + $contact); }
+.FAQ:hover ~ .swoosh { left:($home + $account + $calendar + $commitee + $forms + $res + $blog + $contact + $faq); }

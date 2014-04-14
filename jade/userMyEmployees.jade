@@ -1,0 +1,104 @@
+extends !templates/basic.jade
+
+block script
+	script(type='text/javascript')
+		$(document).ready(function() {
+
+			$.ajax({
+				type: "POST",
+				url: rootLoc + "/calendar/get_managers_employees",
+				data: 'username=tst1111',
+				cache: false,
+				success: function(result) {
+					result = $.parseJSON(result);
+					console.log(result);
+
+					$('.myEmployees').html("");
+					
+					for(var i = 0; i < result.length; i++){
+						$(".myEmployees").append("<li class='topic'>" + result[i]['real_name'] + "</li>");
+					}
+
+				}			
+			});
+			
+			$.ajax({
+				type: "POST",
+				url: rootLoc + "/calendar/get_managers_employeesZ",
+				data: 'username=tst1111',
+				cache: false,
+				success: function(result) {
+					var pen = result['events_pending'];
+					var appr = result['events_approved'];
+					var den = result['events_denied'];
+
+					if (pen.length > 0 || appr.length > 0 || den.length > 0){
+						$('.myEvents').html("");
+						$(".myEvents").append("<li class='topic'>Pending:</li>");
+						if (pen.length != 0){
+							for (var i = 0; i < pen.length; ++i) {
+								$(".myEvents").append("<li class='subTop'>" + pen[i]['title'] + ": " + pen[i]['start'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Location: " + pen[i]['location'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Description: " + pen[i]['description'] + "</li>");
+							}
+						}else{
+							$(".myEvents").append("<li>No Pending Events!</li>");
+						}
+
+						$(".myEvents").append("<li class='topic'>Approved:</li>");
+						if (appr.length != 0){
+							for (var i = 0; i < appr.length; ++i) {
+								$(".myEvents").append("<li class='subTop'>" + appr[i]['title'] + ": " + appr[i]['start'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Location: " + appr[i]['location'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Description: " + appr[i]['description'] + "</li>");
+							}
+						}else{
+							
+							$(".myEvents").append("<li>No Approved Events!</li>");
+						}
+
+						$(".myEvents").append("<li class='topic'>Denied:</li>");
+						if (den.length != 0){
+							for (var i = 0; i < den.length; ++i) {
+								$(".myEvents").append("<li class='subTop'>" + den[i]['title'] + ": " + den[i]['start'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Location: " + den[i]['location'] + "</li>");
+								$(".myEvents").append("<li class='sub'>Description: " + den[i]['description'] + "</li>");
+							}
+						}else{							
+							$(".myEvents").append("<li>No Denied Events!</li>");
+						}
+					}
+				}
+			});
+			
+			$("#back").click(function(event){
+				window.history.go(-1);
+			});
+		});
+block nav
+	+nav('My Account') 
+
+block main
+	div.block.twothird
+		h2 Employees' Events
+		ul.myEvents
+			li.topic Pending:
+			li No Pending Events!
+
+			li.topic Approved:
+			li No Approved Events!
+
+			li.topic Denied:
+			li No Deniend Events!
+
+	div.block.onethird.right
+		h2 My Employees	
+		br 
+
+		input(type='button', id='back', value='Back')
+
+		br
+		br
+
+		ul.myEmployees
+			li No Employees!

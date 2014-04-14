@@ -30,31 +30,25 @@
        var dataString = "start=" + formatted;
        dataString += '&n='+ 5;
        $.ajax({
-         type: "POST",
-         url: rootLoc + "/calendar/get_n_events",
-         data: dataString,
-         cache: false,
-         success: function(result) {
-          result = $.parseJSON(result);
-          console.log(result);
-          
-          if (result.length == 0){
-           //Pads the event box with content so it doesn't look weird if there is ever no content
-           $(".events").html("");
-           $(".events").append("<li class='topic'> No currently listed events!</li>");
-           $(".events").append("<li>Unfourtunately no events are currently listed.  Sorry for the inconvenience.<br/><br/><br/><br/><br/><br/><br/></li>");
-           console.log("inside");
-          }else{
-           $(".events").html("");
-           for (var i = 0; i < result.length; ++i) {
-            $(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
-            $(".events").append("<li>Location: " + result[i]['location'] + "</li>");
-            $(".events").append("<li>Description: " + result[i]['description'] + "</li>");
-           }
+        type: "POST",
+        url: rootLoc + "/calendar/get_n_events",
+        data: dataString,
+        cache: false,
+        success: function(result) {
+         result = $.parseJSON(result);
+         console.log(result);
+         
+         if (result.length != 0){
+          $(".events").html("");
+          for (var i = 0; i < result.length; ++i) {
+           $(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+           $(".events").append("<li>Location: " + result[i]['location'] + "</li>");
+           $(".events").append("<li>Description: " + result[i]['description'] + "</li>");
           }
-         },
+         }
+        },
        });
-      });
+      }); 
       
     </script>
   </head>
@@ -63,7 +57,7 @@
       <div class="container"><a href="index.html" class="logo"><img src="imgs/PDPLogo.png" alt="PDP Logo"></a>
         <p class="motto"><span>Pause for PD...</span>It's good for you!</p>
         <nav class="breadcrumbs"><a href="http://rit.edu" target="_blank">RIT</a><a href="http://ntid.rit.edu" target="_blank">NTID</a><a href="http://ntid.rit.edu/das" target="_blank">DAS</a><a href="http://index.html">Professional Development Program</a></nav>
-        <nav class="mainNav"><a href="index.html" class="Home selected">Home</a><a href="calendarIndex.html" class="Calendar">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
+        <nav class="mainNav"><a href="index.html" class="Home selected">Home</a><a href="userMyAccount.html" class="MyAccount">My Account</a><a href="calendarIndex.html" class="Calendar">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
         </nav>
       </div>
     </header>
@@ -72,18 +66,8 @@
         <div class="block twothird">
           <h2>Upcoming Events</h2>
           <ul class="content events">
-            <li class="topic">xxxxday, Month xx</li>
-            <li>This should autopopulate from the calendar</li>
-            <li>Because it would be obnoxious to have to write this by hand every week and a half or so</li>
-            <li class="topic">xxxxday, Month xx</li>
-            <li>But I do think it should list a week and a half ahead of the current department</li>
-            <li class="topic">xxxxday, Month xx</li>
-            <li>And then repopulate every week so there's a half week of overlap always</li>
-            <li class="topic">xxxxday, Month xx</li>
-            <li>I hope that it will be at least this long</li>
-            <li>Otherwise it looks a little funny</li>
-            <li>Nothing breaks no matter how long/short it looks but it just looks funny</li>
-            <li>Basically, it needs to be just longer than the mission statement to not look funny</li>
+            <li class="topic">No currently listed events!</li>
+            <li>Unfourtunately no events are currently listed.  Sorry for the inconvenience.</li><br><br><br><br><br><br>
           </ul>
         </div>
         <div class="block onethird right">

@@ -27,7 +27,7 @@ input:focus, textarea:focus, select:focus {
 	outline:none;
 	border-color:$brown;
 }
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
 	cursor:pointer;
 	margin-bottom:0;
 	background:$orange;
@@ -36,7 +36,7 @@ input[type="submit"] {
 	color:white;
 	@include transition(background);
 }
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
 	background:$brown;
 	border-color:$brown;
 }

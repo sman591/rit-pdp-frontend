@@ -21,12 +21,39 @@
     <script type="text/javascript">
       $(document).ready(function() {
        var eventId = getQueryVariable("event");
+       var userId = 1;
+       
        $( "#modifyEventForm" ).submit(function( event ) {
         event.preventDefault();
         var sendId = getQueryVariable("event");
         if(confirm('Would You like to modify this event?')){					
          window.location="/calendarEditEvent.html?event=" +  encodeURI(sendId);
         }
+       });
+       
+       $( "#register" ).click(function( event ) {
+        event.preventDefault();
+        
+        var dataString = 'event_uid='+ eventId;
+        dataString += '&uid='+ userId;
+        
+        $.ajax({
+         type: "POST",
+         url: rootLoc + "/calendar/getevent",
+         data: dataString,
+         cache: false,
+         success: function(result) {
+          window.location="/userMyAccount.html"
+         },
+         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+          console.log("Status: " + textStatus); 
+          console.log("Error: " + errorThrown); 
+         }
+        });		
+       });
+       
+       $("#back").click(function(event){
+        window.history.go(-1);
        });
        
        $.ajax({
@@ -73,7 +100,7 @@
       <div class="container"><a href="index.html" class="logo"><img src="imgs/PDPLogo.png" alt="PDP Logo"></a>
         <p class="motto"><span>Pause for PD...</span>It's good for you!</p>
         <nav class="breadcrumbs"><a href="http://rit.edu" target="_blank">RIT</a><a href="http://ntid.rit.edu" target="_blank">NTID</a><a href="http://ntid.rit.edu/das" target="_blank">DAS</a><a href="http://index.html">Professional Development Program</a></nav>
-        <nav class="mainNav"><a href="index.html" class="Home">Home</a><a href="calendarIndex.html" class="Calendar selected">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
+        <nav class="mainNav"><a href="index.html" class="Home">Home</a><a href="userMyAccount.html" class="MyAccount">My Account</a><a href="calendarIndex.html" class="Calendar selected">Calendar</a><a href="committee.html" class="Committee">Committee</a><a href="forms.html" class="Forms">Forms</a><a href="resources.html" class="Resources">Resources</a><a href="blog.html" class="Blog">Blog</a><a href="contact.html" class="Contact">Contact</a><a href="faq.html" class="FAQ">FAQ</a><img src="imgs/swoosh.png" class="swoosh"/>
         </nav>
       </div>
     </header>
@@ -83,6 +110,7 @@
           <h2>View Event</h2>
           <div class="content center">
             <form id="modifyEventForm" class="content center">
+              <input type="button" id="back" value="Back"><br><br>
               <input type="submit" id="submitButton" value="Modify Event"><br><br>
               <label for="title">Event Title:</label>
               <p id="title" class="viewPage"></p>
@@ -102,6 +130,7 @@
               <p id="endTimeApprove" class="viewPage"></p>
               <label for="description">Event Description:</label>
               <p id="description" class="viewPage"></p>
+              <input type="button" id="register" value="Register for this Event">
             </form>
           </div>
         </div>
