@@ -39,13 +39,16 @@
        });
        $.ajax({
         type: "POST",
-        url: rootLoc + "/calendar/get_managers_employeesZ",
+        url: rootLoc + "/calendar/get_managers_events",
         data: 'username=tst1111',
         cache: false,
         success: function(result) {
-         var pen = result['events_pending'];
-         var appr = result['events_approved'];
-         var den = result['events_denied'];
+         result = $.parseJSON(result);
+         console.log(result);
+         
+         var pen = result['pending_events'];
+         var appr = result['approved_events'];
+         var den = result['denied_events'];
          
          if (pen.length > 0 || appr.length > 0 || den.length > 0){
           $('.myEvents').html("");
@@ -53,33 +56,42 @@
           if (pen.length != 0){
            for (var i = 0; i < pen.length; ++i) {
             $(".myEvents").append("<li class='subTop'>" + pen[i]['title'] + ": " + pen[i]['start'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Location: " + pen[i]['location'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Description: " + pen[i]['description'] + "</li>");
+            
+            var waiting = pen[i]['pending_attendees'];
+            for(var j = 0; j < waiting.length; j++){
+             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+            }
            }
           }else{
-           $(".myEvents").append("<li>No Pending Events!</li>");
+           $(".myEvents").append("<li>Nobody needs approval for any upcoming events.</li>");
           }
           
           $(".myEvents").append("<li class='topic'>Approved:</li>");
           if (appr.length != 0){
            for (var i = 0; i < appr.length; ++i) {
             $(".myEvents").append("<li class='subTop'>" + appr[i]['title'] + ": " + appr[i]['start'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Location: " + appr[i]['location'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Description: " + appr[i]['description'] + "</li>");
+            
+            var waiting = appr[i]['approved_attendees'];
+            for(var j = 0; j < waiting.length; j++){
+             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+            }
            }
           }else{
-           $(".myEvents").append("<li>No Approved Events!</li>");
+           $(".myEvents").append("<li>Nobody has approval for any upcoming events.</li>");
           }
           
           $(".myEvents").append("<li class='topic'>Denied:</li>");
           if (den.length != 0){
            for (var i = 0; i < den.length; ++i) {
             $(".myEvents").append("<li class='subTop'>" + den[i]['title'] + ": " + den[i]['start'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Location: " + den[i]['location'] + "</li>");
-            $(".myEvents").append("<li class='sub'>Description: " + den[i]['description'] + "</li>");
+            
+            var waiting = den[i]['denied_attendees'];
+            for(var j = 0; j < waiting.length; j++){
+             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+            }
            }
           }else{							
-           $(".myEvents").append("<li>No Denied Events!</li>");
+           $(".myEvents").append("<li>Nobody has been denied for any upcoming events.</li>");
           }
          }
         }
@@ -101,6 +113,7 @@
     </header>
     <main>
       <div class="container">
+        <input type="button" id="back" value="Back" class="onethird"><br><br>
         <div class="block twothird">
           <h2>Employees' Events</h2>
           <ul class="myEvents">
@@ -113,8 +126,7 @@
           </ul>
         </div>
         <div class="block onethird right">
-          <h2>My Employees	</h2><br>
-          <input type="button" id="back" value="Back"><br><br>
+          <h2>My Employees </h2>
           <ul class="myEmployees">
             <li>No Employees!</li>
           </ul>
