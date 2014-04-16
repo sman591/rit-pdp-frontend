@@ -19,8 +19,58 @@
     <script type="text/javascript" src="../time/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../time/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
+      function approveFunc(e){
+       var parent = $(this).parent();
+       var userId = parent.attr('name');
+       var eventId = parent.val();
+       console.log(userId);
+       console.log(eventId);
+       
+       
+       
+       var dataString = 'event_uid='+ eventId;
+       dataString += '&uid='+ userId;
+       dataString += '&username=tst1111';
+       $.ajax({
+        type: "POST",
+        url: rootLoc + "/calendar/approve",
+        data: dataString,
+        cache: false,
+        success: function(result) {
+         console.log("Approved!");
+         location.reload();
+        }
+       });	
+      }
       
+      function denyFunc(e){
+       var parent = $(this).parent();
+       var userId = parent.attr('name');
+       var eventId = parent.val();
+       console.log(userId);
+       console.log(eventId);
+       
+       
+       
+       var dataString = 'event_uid='+ eventId;
+       dataString += '&uid='+ userId;
+       dataString += '&username=tst1111';
+       $.ajax({
+        type: "POST",
+        url: rootLoc + "/calendar/deny",
+        data: dataString,
+        cache: false,
+        success: function(result) {
+         console.log("Denied!");
+         location.reload();
+        }
+       });	
+      }
+      
+      $(document).ready(function() {
+       var myUids = [];
+       var done = false;
+       
        $.ajax({
         type: "POST",
         url: rootLoc + "/calendar/get_managers_employees",
@@ -33,8 +83,9 @@
          $('.myEmployees').html("");
          for(var i = 0; i < result.length; i++){
           $(".myEmployees").append("<li class='topic'>" + result[i]['real_name'] + "</li>");
+          myUids.push(result[i]['uid']);
          }
-         
+         done = true;
         }			
        });
        $.ajax({
@@ -43,6 +94,9 @@
         data: 'username=tst1111',
         cache: false,
         success: function(result) {
+         $('.myEvents').on('click', '.approve', approveFunc);
+         $('.myEvents').on('click', '.deny', denyFunc);
+         
          result = $.parseJSON(result);
          console.log(result);
          
@@ -58,8 +112,22 @@
             $(".myEvents").append("<li class='subTop'>" + pen[i]['title'] + ": " + pen[i]['start'] + "</li>");
             
             var waiting = pen[i]['pending_attendees'];
+            console.log("pen");
+            console.log(pen[i]);
             for(var j = 0; j < waiting.length; j++){
-             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+             if(myUids.indexOf(waiting[j]['uid']) > -1){
+              var string = "<li class='sub'";
+              string += " name='" + waiting[j]['uid'] + "'";
+              string += " value='" + pen[i]['id'] + "'>";
+              string += waiting[j]['real_name'];
+              string += " <a class='approve'><b>Approve</b></a> ";
+              string += " <a class='deny'><b>Deny</b></a> ";
+              
+              
+              string += "</li>";
+              
+              $(".myEvents").append(string);
+             }
             }
            }
           }else{
@@ -72,8 +140,22 @@
             $(".myEvents").append("<li class='subTop'>" + appr[i]['title'] + ": " + appr[i]['start'] + "</li>");
             
             var waiting = appr[i]['approved_attendees'];
+            console.log("appr");
+            console.log(appr[i]);
+            
             for(var j = 0; j < waiting.length; j++){
-             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+             if(myUids.indexOf(waiting[j]['uid']) > -1){
+              var string = "<li class='sub'";
+              string += " name='" + waiting[j]['uid'] + "'";
+              string += " value='" + appr[i]['id'] + "'>";
+              string += waiting[j]['real_name'];
+              string += " <a class='deny'><b>Deny</b></a> ";
+              
+              
+              string += "</li>";
+              
+              $(".myEvents").append(string);
+             }
             }
            }
           }else{
@@ -86,8 +168,22 @@
             $(".myEvents").append("<li class='subTop'>" + den[i]['title'] + ": " + den[i]['start'] + "</li>");
             
             var waiting = den[i]['denied_attendees'];
+            console.log("den");
+            console.log(den[i]);
+            
             for(var j = 0; j < waiting.length; j++){
-             $(".myEvents").append("<li class='sub'>" + waiting[j]['real_name'] + "</li>");
+             if(myUids.indexOf(waiting[j]['uid']) > -1){
+              var string = "<li class='sub'";
+              string += " name='" + waiting[j]['uid'] + "'";
+              string += " value='" + den[i]['id'] + "'>";
+              string += waiting[j]['real_name'];
+              string += " <a class='approve'><b>Approve</b></a> ";
+              
+              
+              string += "</li>";
+              
+              $(".myEvents").append(string);
+             }
             }
            }
           }else{							
@@ -95,6 +191,7 @@
           }
          }
         }
+        
        });
        $("#back").click(function(event){
         window.history.go(-1);
