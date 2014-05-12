@@ -3,7 +3,7 @@ extends !templates/basic.jade
 block script
 	script(type='text/javascript')
 		$(document).ready(function() {
-
+			var userId = 'tst0000';
 
 			// page is now ready, initialize the calendar...
 
@@ -19,11 +19,13 @@ block script
 				selectable: true,
 				selectHelper: true,
 				select: function(start, end, allDay) {
-					console.log(allDay);
-					if(confirm('Would You like to add an event to this day?')){
-						window.location.href="calendarAddEvent.html?start=" + encodeURI(start) + "&end=" + encodeURI(end);
+					if(userId == 'tst1111'){
+						console.log(allDay);
+						if(confirm('Would You like to add an event to this day?')){
+							window.location.href="calendarAddEvent.html?start=" + encodeURI(start) + "&end=" + encodeURI(end);
+						}
+						calendar.fullCalendar('unselect');
 					}
-					calendar.fullCalendar('unselect');
 				}
 			})
 		});
