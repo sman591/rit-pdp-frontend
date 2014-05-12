@@ -5,7 +5,12 @@ block script
 		$(document).ready(function() {
 			
 			var eventId = getQueryVariable("event");
-			var userId = 1;
+			//var userId = 'tst1111';
+			var userId = 'tst0000';
+
+			if(userId != "tst1111"){
+				$("#submitButton").hide();
+			}
 
 			$( "#modifyEventForm" ).submit(function( event ) {
 				event.preventDefault();
@@ -19,7 +24,7 @@ block script
 				event.preventDefault();
 
 				var dataString = 'event_uid='+ eventId;
-				dataString += '&uid='+ userId;
+				dataString += '&uid=' + userId;
 
 				$.ajax({
 					type: "POST",

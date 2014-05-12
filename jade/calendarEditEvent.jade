@@ -6,8 +6,7 @@ block script
 			
 			var eventId = getQueryVariable("event");
 			$('.time').datetimepicker();
-
-
+			var userId = 'tst1111';
 
 			$.ajax({
 					type: "POST",
@@ -93,7 +92,8 @@ block script
 				dataString += '&approval_start='+ startApprove;
 				dataString += '&approval_end='+ endApprove;
 				dataString += '&description=' + des;
-				dataString += '&event_uid=' + eventId;
+				dataString += '&event_uid=' + eventId
+				dataString += '&username=' + userId;
 				
 				console.log("Sending out: " + dataString);
 

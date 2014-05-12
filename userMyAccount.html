@@ -20,11 +20,13 @@
     <script type="text/javascript" src="../time/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-      
+       //var userId = 'tst1111';
+       var userId = 'tst0000';
+       
        $.ajax({
         type: "POST",
         url: rootLoc + "/calendar/get_current_user",
-        data: 'username=tst0000',
+        data: 'username=' + userId,
         cache: false,
         success: function(result) {
          result = $.parseJSON(result);
@@ -94,12 +96,24 @@
        $.ajax({
         type: "POST",
         url: rootLoc + "/calendar/get_past_n_events",
-        data: 'username=tst0000&n=10',
+        data: 'username=' + userId,
         cache: false,
         success: function(result) {
          result = $.parseJSON(result);
          console.log(result);
          
+         $('.oldEvents').html("");
+          $(".oldEvents").append("<li class='topic'>Past Attended Events:</li>");
+          if (result.length != 0){
+           for (var i = 0; i < result.length; ++i) {
+            $(".oldEvents").append("<li class='subTop'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
+            $(".oldEvents").append("<li class='sub'>Location: " + result[i]['location'] + "</li>");
+            $(".oldEvents").append("<li class='sub'>Description: " + result[i]['description'] + "</li>");
+           }
+          }else{
+           $(".oldEvents").append("<li>You have attended no past events this year!</li>");
+          }
+          
         }			
        });
        $( "#myEmployees" ).submit(function( event ) {
