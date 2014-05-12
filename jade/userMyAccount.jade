@@ -7,7 +7,7 @@ block script
 			$.ajax({
 				type: "POST",
 				url: rootLoc + "/calendar/get_current_user",
-				data: 'username=tst1111',
+				data: 'username=tst0000',
 				cache: false,
 				success: function(result) {
 					result = $.parseJSON(result);
@@ -75,6 +75,18 @@ block script
 					}
 				},
 			});
+
+			$.ajax({
+				type: "POST",
+				url: rootLoc + "/calendar/get_past_n_events",
+				data: 'username=tst0000&n=10',
+				cache: false,
+				success: function(result) {
+					result = $.parseJSON(result);
+					console.log(result);
+
+				}			
+			});
 			
 			$( "#myEmployees" ).submit(function( event ) {
 				event.preventDefault();
@@ -107,6 +119,16 @@ block main
 
 			br
 			br
-
+			
 			input(type='submit', id='employees', value='My Employees')	
+
+	br
+	br
+
+	div.block.twothird
+		h2 My Past Events
+		ul.oldEvents
+			li.topic Past Attended Events:
+			li You have attended no past events!
+
 

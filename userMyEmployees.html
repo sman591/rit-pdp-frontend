@@ -55,6 +55,7 @@
        var dataString = 'event_uid='+ eventId;
        dataString += '&uid='+ userId;
        dataString += '&username=tst1111';
+       
        $.ajax({
         type: "POST",
         url: rootLoc + "/calendar/deny",
@@ -62,6 +63,65 @@
         cache: false,
         success: function(result) {
          console.log("Denied!");
+         location.reload();
+        }
+       });	
+      }
+      
+      function deleteFunc(e){
+       var parent = $(this).parent();
+       //console.log(parent.attributes);
+       console.log(parent.attr('value'));
+       
+       
+       var userId = parent.attr('value');
+       console.log(userId);
+       
+       var dataString = 'uid='+ userId;
+       dataString += '&manager_uid=""';
+       dataString += '&username=tst1111';
+       console.log(dataString);
+       $.ajax({
+        type: "POST",
+        url: rootLoc + "/calendar/set_manager",
+        data: dataString,
+        cache: false,
+        success: function(result) {
+         console.log("Removed!");
+         location.reload();
+        }
+       });	
+      }
+      
+      function addFunc(e){
+       event.preventDefault();
+       var email = $('#email').val().trim();
+       email = email.toLowerCase();
+       var split = email.split('@');
+       var name = split[0];
+       var where = split[1];
+       
+       if(where != "rit.edu"){
+        console.log("NO CAN DO");
+       }
+       
+       console.log(email);
+       console.log(split);
+       console.log(name);
+       console.log(where);
+       
+       
+       var dataString = 'uid='+ name;
+       dataString += '&manager_uid=tst1111';
+       dataString += '&username=tst1111';
+       console.log(dataString);
+       $.ajax({
+        type: "POST",
+        url: rootLoc + "/calendar/set_manager",
+        data: dataString,
+        cache: false,
+        success: function(result) {
+         console.log("Added!");
          location.reload();
         }
        });	
@@ -78,11 +138,19 @@
         cache: false,
         success: function(result) {
          result = $.parseJSON(result);
+         $('.myEmployees').on('click', '.delEmployee', deleteFunc);
          console.log(result);
          
          $('.myEmployees').html("");
          for(var i = 0; i < result.length; i++){
-          $(".myEmployees").append("<li class='topic'>" + result[i]['real_name'] + "</li>");
+          var htmlString = "<li class='topic' ";
+          htmlString += "value='" + result[i]['uid'] + "'>";
+          htmlString += result[i]['real_name'];
+          htmlString += "  <a class='delEmployee'><b>(X)</b></a>";
+          htmlString += "</li>";
+          
+          console.log(htmlString);
+          $(".myEmployees").append(htmlString);
           myUids.push(result[i]['uid']);
          }
          done = true;
@@ -112,8 +180,8 @@
             $(".myEvents").append("<li class='subTop'>" + pen[i]['title'] + ": " + pen[i]['start'] + "</li>");
             
             var waiting = pen[i]['pending_attendees'];
-            console.log("pen");
-            console.log(pen[i]);
+            //console.log("pen");
+            //console.log(pen[i]);
             for(var j = 0; j < waiting.length; j++){
              if(myUids.indexOf(waiting[j]['uid']) > -1){
               var string = "<li class='sub'";
@@ -140,8 +208,8 @@
             $(".myEvents").append("<li class='subTop'>" + appr[i]['title'] + ": " + appr[i]['start'] + "</li>");
             
             var waiting = appr[i]['approved_attendees'];
-            console.log("appr");
-            console.log(appr[i]);
+            //console.log("appr");
+            //console.log(appr[i]);
             
             for(var j = 0; j < waiting.length; j++){
              if(myUids.indexOf(waiting[j]['uid']) > -1){
@@ -168,8 +236,8 @@
             $(".myEvents").append("<li class='subTop'>" + den[i]['title'] + ": " + den[i]['start'] + "</li>");
             
             var waiting = den[i]['denied_attendees'];
-            console.log("den");
-            console.log(den[i]);
+            //console.log("den");
+            //console.log(den[i]);
             
             for(var j = 0; j < waiting.length; j++){
              if(myUids.indexOf(waiting[j]['uid']) > -1){
@@ -196,6 +264,8 @@
        $("#back").click(function(event){
         window.history.go(-1);
        });
+       
+       $( "#addRemoveEmployees" ).submit(addFunc);
       });
     </script>
   </head>
@@ -224,9 +294,14 @@
         </div>
         <div class="block onethird right">
           <h2>My Employees </h2>
-          <ul class="myEmployees">
-            <li>No Employees!</li>
-          </ul>
+          <form id="addRemoveEmployees" class="content center">
+            <ul class="myEmployees">
+              <li>No Employees!</li>
+            </ul><br>
+            <label for="email">Enter New Employee Email:</label>
+            <input id="email">
+            <input type="submit" id="addEmployee" value="Add Employee">
+          </form>
         </div>
       </div>
     </main>
