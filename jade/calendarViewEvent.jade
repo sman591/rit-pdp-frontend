@@ -1,9 +1,9 @@
 extends !templates/basic.jade
-
+	
 block script 
-	script(type='text/javascript')
-		$(document).ready(function() {
-			
+	script(type='text/javascript').
+		$(document).ready(function(){
+
 			var eventId = getQueryVariable("event");
 			var userId = 'tst1111';
 			//var userId = 'tst0000';
@@ -15,12 +15,12 @@ block script
 			$( "#modifyEventForm" ).submit(function( event ) {
 				event.preventDefault();
 				var sendId = getQueryVariable("event");
-				if(confirm('Would You like to modify this event?')){					
+				if(confirm('Would You like to modify this event?')){
 					window.location="/calendarEditEvent.html?event=" +  encodeURI(sendId);
 				}
 			});
 
-			$( "#register" ).click(function( event ) {
+			$("#register").click(function( event ) {
 				event.preventDefault();
 
 				var dataString = 'event_uid='+ eventId;
@@ -38,9 +38,7 @@ block script
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
-				});		
-						
-				
+				});
 			});
 
 			$("#back").click(function(event){
@@ -81,11 +79,9 @@ block script
 						console.log("Status: " + textStatus); 
 						console.log("Error: " + errorThrown); 
 					}
-				});			
+				});
 		});
-		
 
-			
 block nav
 	+nav('Calendar')
 
@@ -128,8 +124,13 @@ block main
 				label(for='endTimeApprove') Approval End Time:
 				p(id='endTimeApprove', class='viewPage')
 
+				label(for='profCEUs') Professional Studies CEUs:
+				p(id='profCEUs', class='viewPage')
+
+				label(for='genCEUs') General Studies CEUs:
+				p(id='genCEUs', class='viewPage')
+
 				label(for='description') Event Description:
 				p(id='description', class='viewPage')
 
 				input(type='button', id='register', value='Register for this Event')
-

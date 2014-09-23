@@ -1,7 +1,7 @@
 extends !templates/basic.jade
 
 block script
-	script(type='text/javascript')
+	script(type='text/javascript').
 		function approveFunc(e){
 			var parent = $(this).parent();
 			var userId = parent.attr('name');
@@ -288,4 +288,3 @@ block main
 			label(for='email') Enter New Employee Email:
 			input(type=text, id='email')
 			input(type='submit', id='addEmployee', value='Add Employee')
-

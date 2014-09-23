@@ -1,21 +1,22 @@
-pages = ['Home', 'My Account', 'Calendar', 'Committee', 'Forms', 'Resources', 'Blog', 'Contact', 'FAQ']
-
 mixin nav(page)
-	nav(class='mainNav')
-		for currentPage in pages 
-			pageClass = currentPage
-			
-			if currentPage == 'Home' 
-				lowercaseURL = 'index.html'
-			else if currentPage == 'Calendar'
-				lowercaseURL = 'calendarIndex.html'
-			else if currentPage == 'My Account'
-				lowercaseURL = 'userMyAccount.html'
-				pageClass = "MyAccount"
-			else
-				lowercaseURL = currentPage.toLowerCase() + '.html'
-			if currentPage == page
-				a(href=lowercaseURL, class=pageClass + ' selected') #{currentPage}
-			else
-				a(href=lowercaseURL, class=pageClass) #{currentPage}
-		img(src='imgs/swoosh.png', class='swoosh')
+  nav(class='mainNav')
+    each currentPage in ['Home', 'My Account', 'Calendar', 'Committee', 'Forms', 'Resources', 'Blog', 'Contact', 'FAQ']
+
+      -pageClass = currentPage
+      
+      if currentPage == 'Home' 
+        -lowercaseURL = 'index.html'
+      else if currentPage == 'Calendar'
+        -lowercaseURL = 'calendarIndex.html'
+      else if currentPage == 'My Account'
+        -lowercaseURL = 'userMyAccount.html'
+        -pageClass = 'MyAccount'
+      else
+        -lowercaseURL = currentPage.toLowerCase() + '.html'
+
+      if currentPage == page
+        a(href=lowercaseURL, class=pageClass + ' selected') #{currentPage}
+      else
+        a(href=lowercaseURL, class=pageClass) #{currentPage}
+
+    img(src='imgs/swoosh.png', class='swoosh')

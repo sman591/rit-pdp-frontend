@@ -1,7 +1,7 @@
 extends !templates/basic.jade
 
 block script 
-	script(type='text/javascript')
+	script(type='text/javascript').
 		$(document).ready(function() {
 			
 			var eventId = getQueryVariable("event");
@@ -152,6 +152,14 @@ block main
 				span#endTimeError.error Please enter an event end time
 			input(type='text', id='endTimeApprove', class='time', placeholder="Enter text in the format 04:35PM")
 
+			label(for='profCEUs') Professional Studies CEUs:
+				span#profCEUsError.error Please enter a valid CEU quantity
+			input(type='text', id='profCEUs', placeholder=".2")
+
+			label(for='genCEUs') General Studies CEUs:
+				span#genCEUsError.error Please enter a valid CEU quantity
+			input(type='text', id='genCEUs', placeholder=".2")
+
 			label(for='description') Event Description:
 				span#descriptionError.error Required Field
 			textarea(id='description', rows='6', placeholder="Quick stand up meeting to report the status of our current projects")
@@ -160,4 +168,3 @@ block main
 
 		form#deleteEventForm.content.center
 			input(type='submit', id='submitButton', value='Delete Event')
-		
