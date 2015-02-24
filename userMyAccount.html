@@ -4,8 +4,8 @@
     <title>Professional Development Program</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-    <link rel="dns-prefetch" href="//google-analytics.com"/>
+    <link rel="dns-prefetch" href="http://fonts.googleapis.com"/>
+    <link rel="dns-prefetch" href="http://google-analytics.com"/>
     <link rel="icon" href="imgs/favicon.png"/>
     <link rel="stylesheet" href="fullcalendar.css"/>
     <link rel="stylesheet" href="../time/bootstrap.css"/>
@@ -22,14 +22,13 @@
       $(document).ready(function() {
        var userId = 'tst1111';
        //var userId = 'tst0000';
-       
        $.ajax({
-        type: "POST",
-        url: rootLoc + "/calendar/get_current_user",
-        data: 'username=' + userId,
-        cache: false,
+        type: "GET",
+        url: rootLoc + "/api/v1/users/" + userId,
+        cache: true,
         success: function(result) {
-         result = $.parseJSON(result);
+         //result = $.parseJSON(result);
+         console.log("User: " + result);
          console.log(result);
          
          var lev = result['account_level'];
@@ -92,14 +91,13 @@
          }
         },
        });
-       
+       /*//Used to fill events attended in the past
        $.ajax({
         type: "POST",
         url: rootLoc + "/calendar/get_past_n_events",
         data: 'username=' + userId,
         cache: false,
         success: function(result) {
-         result = $.parseJSON(result);
          console.log(result);
          
          $('.oldEvents').html("");
@@ -114,8 +112,10 @@
            $(".oldEvents").append("<li>You have attended no past events this year!</li>");
           }
           
-        }			
+        }
+        
        });
+       */
        $( "#myEmployees" ).submit(function( event ) {
         event.preventDefault();
         window.location.href="userMyEmployees.html";
@@ -149,9 +149,9 @@
         <div class="block onethird right">
           <h2>My Info</h2>
           <form id="myEmployees" class="content center">
-            <p id="name">Hello Jeff Haak!</p>
-            <p id="email">My Email: Jeh9734@rit.edu</p>
-            <p id="manager">My Manager: Jeff Haak!	</p><br/><br/>
+            <p id="name">Hello Broken!</p>
+            <p id="email">My Email: Broken@rit.edu</p>
+            <p id="manager">My Manager: Broken!	</p><br/><br/>
             <input type="submit" id="employees" value="My Employees"/>
           </form>
         </div><br/><br/>

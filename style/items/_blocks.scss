@@ -32,6 +32,20 @@
 	}
 	> .important { color:$orange; }
 }
+
+.orangeBorder{
+	border:.25rem solid $orange;
+	border-radius:.25em;
+	background:$highlight;
+	margin:auto;
+	display:block;
+	
+	> p.title{
+		color:white;
+		background-color:$orange;
+	}
+}
+
 .onethird {
 	width:384px;
 	width:calc(33.3333% - 16px);

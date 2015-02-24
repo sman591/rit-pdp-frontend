@@ -5,14 +5,13 @@ block script
 		$(document).ready(function() {
 			var userId = 'tst1111';
 			//var userId = 'tst0000';
-
 			$.ajax({
-				type: "POST",
-				url: rootLoc + "/calendar/get_current_user",
-				data: 'username=' + userId,
-				cache: false,
+				type: "GET",
+				url: rootLoc + "/api/v1/users/" + userId,
+				cache: true,
 				success: function(result) {
-					result = $.parseJSON(result);
+					//result = $.parseJSON(result);
+					console.log("User: " + result);
 					console.log(result);
 
 					var lev = result['account_level'];
@@ -77,14 +76,14 @@ block script
 					}
 				},
 			});
-
+			
+			/*//Used to fill events attended in the past
 			$.ajax({
 				type: "POST",
 				url: rootLoc + "/calendar/get_past_n_events",
 				data: 'username=' + userId,
 				cache: false,
 				success: function(result) {
-					result = $.parseJSON(result);
 					console.log(result);
 
 					$('.oldEvents').html("");
@@ -99,8 +98,11 @@ block script
 							$(".oldEvents").append("<li>You have attended no past events this year!</li>");
 						}
 
-				}			
+				}
+				
+
 			});
+			*/
 			
 			$( "#myEmployees" ).submit(function( event ) {
 				event.preventDefault();
@@ -127,9 +129,9 @@ block main
 	div.block.onethird.right
 		h2 My Info
 		form#myEmployees.content.center
-			p#name Hello Jeff Haak!
-			p#email My Email: Jeh9734@rit.edu
-			p#manager My Manager: Jeff Haak!	
+			p#name Hello Broken!
+			p#email My Email: Broken@rit.edu
+			p#manager My Manager: Broken!	
 
 			br
 			br

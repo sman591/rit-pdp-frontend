@@ -11,7 +11,32 @@ block script
 			var calendar = $('#calendar').fullCalendar({
 				// put your options and callbacks here
 				//events: 'https://www.google.com/calendar/feeds/rvkgqt49saqhg4i17fo48u8uk0%40group.calendar.google.com/public/basic',
-				events: rootLoc + '/calendar/events',
+				//events: rootLoc + '/api/v1/calendar/events/',
+				events: function(start, end, callback) {
+					$.ajax({
+							url: rootLoc + '/api/v1/calendar/events/',
+							dataType: 'json',
+							data: {
+									// our hypothetical feed requires UNIX timestamps
+									start: start,
+									end: end
+							},
+							success: function(result) {
+									var events = [];
+
+									for (var i = 0; i < result['items'].length; ++i) {
+										var item = result['items'][i];
+										item["url"] = rootLoc + "/calendarViewEvent.html?event=" + item["id"];
+										console.log(item["url"]);
+										events.push(item);
+
+									}
+									console.log(events);
+									callback(events);
+
+							}
+					});
+				},
 				header: {
 					left: 'prev,next today',
 					center: 'title',

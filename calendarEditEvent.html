@@ -4,8 +4,8 @@
     <title>Professional Development Program</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-    <link rel="dns-prefetch" href="//google-analytics.com"/>
+    <link rel="dns-prefetch" href="http://fonts.googleapis.com"/>
+    <link rel="dns-prefetch" href="http://google-analytics.com"/>
     <link rel="icon" href="imgs/favicon.png"/>
     <link rel="stylesheet" href="fullcalendar.css"/>
     <link rel="stylesheet" href="../time/bootstrap.css"/>
@@ -25,13 +25,12 @@
        var userId = 'tst1111';
        
        $.ajax({
-         type: "POST",
-         url: rootLoc + "/calendar/getevent",
-         data: "event_uid=" + eventId,
+         type: "GET",
+         url: rootLoc + "/api/v1/calendar/events/" + eventId,
          cache: false,
          success: function(result) {
           console.log(result);
-          result = $.parseJSON(result);
+          
           console.log(typeof result);
           console.log(result["title"]);
           console.log(result['location']);
@@ -47,13 +46,24 @@
           var form = $( "#editEventForm" );
           form.find( "input[id='title']" ).val(result['title']);
           form.find( "input[id='loc']" ).val(result['location']);
-          form.find( "input[id='startTime']" ).val(result['start']);
-          form.find( "input[id='endTime']" ).val(result['end']);
-          form.find( "input[id='startTimeReg']" ).val(result['registration_start']);
-          form.find( "input[id='endTimeReg']" ).val(result['registration_end']);
-          form.find( "input[id='startTimeApprove']" ).val(result['approval_start']);
-          form.find( "input[id='endTimeApprove']" ).val(result['registration_end']);
+          form.find( "input[id='startTime']" ).val(formatDate(result['start']));
+          form.find( "input[id='endTime']" ).val(formatDate(result['end']));
+          form.find( "input[id='startTimeReg']" ).val(formatDate(result['registration_start']));
+          form.find( "input[id='endTimeReg']" ).val(formatDate(result['registration_end']));
+          form.find( "input[id='startTimeApprove']" ).val(formatDate(result['approval_start']));
+          form.find( "input[id='endTimeApprove']" ).val(formatDate(result['registration_end']));
           $("#description" ).val(result['description']);
+          
+          if(result['ceus']['type'] === "general"){
+           $("#genCEUs").html(result['ceus']['scalar']);
+           $("#profCEUs").html("0");
+          }else if(result['ceus']['type'] === "professional"){
+           $("#genCEUs").html("0");
+           $("#profCEUs").html(result['ceus']['scalar']);
+          }else{
+           $("#genCEUs").html("0");
+           $("#profCEUs").html("0");
+          }
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) { 
           console.log("Status: " + textStatus); 

@@ -4,8 +4,8 @@
     <title>Professional Development Program</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-    <link rel="dns-prefetch" href="//google-analytics.com"/>
+    <link rel="dns-prefetch" href="http://fonts.googleapis.com"/>
+    <link rel="dns-prefetch" href="http://google-analytics.com"/>
     <link rel="icon" href="imgs/favicon.png"/>
     <link rel="stylesheet" href="fullcalendar.css"/>
     <link rel="stylesheet" href="../time/bootstrap.css"/>
@@ -20,6 +20,9 @@
     <script type="text/javascript" src="../time/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
+       //$( "#frequencySelectionBox" ).hide();
+       //$( "#daySelectionBox" ).hide();
+       $('.hideRepeat').hide();
        $('.time').datetimepicker();
        
        var urlStart = decodeURI(getQueryVariable("start")).toLowerCase();
@@ -90,6 +93,19 @@
          }
         });
        });
+       $('input[type=radio][name=repeat]').change(function() {
+        if (this.value == 'yes') {
+         //$( "#frequencySelectionBox" ).show();
+         //$( "#daySelectionBox" ).show();
+         $('.hideRepeat').show();
+        }
+        else if (this.value == 'no') {
+         $('#frequencySelectionBox').find("input:radio").prop("checked", false).end();
+         $('#daySelectionBox').find("input:checkbox").prop("checked", false).end();
+         $('.hideRepeat').hide();
+        }
+       });
+       
       });
       
     </script>
@@ -105,7 +121,7 @@
     </header>
     <main>
       <div class="container">
-        <div class="block onehalf center">
+        <div class="block twothird center">
           <h2>Add Event</h2>
           <form id="addEventForm" class="content center">
             <input type="button" id="back" value="Back"/><br/><br/>
@@ -117,14 +133,216 @@
             <input type="text" id="startTime" placeholder="Enter text in the format 03:35PM" class="time"/>
             <label for="endTime">Event End Time:<span id="endTimeError" class="error">Please enter an event end time</span></label>
             <input type="text" id="endTime" placeholder="Enter text in the format 04:35PM" class="time"/>
-            <label for="startTimeReg">Registration Start Time:<span id="startTimeError" class="error">Please enter an event start time</span></label>
-            <input type="text" id="startTimeReg" placeholder="Enter text in the format 03:35PM" class="time"/>
-            <label for="endTimeReg">Registration End Time:<span id="endTimeError" class="error">Please enter an event end time</span></label>
-            <input type="text" id="endTimeReg" placeholder="Enter text in the format 04:35PM" class="time"/>
-            <label for="startTimeApprove">Approval Start Time:<span id="startTimeError" class="error">Please enter an event start time</span></label>
-            <input type="text" id="startTimeApprove" placeholder="Enter text in the format 03:35PM" class="time"/>
-            <label for="endTimeApprove">Approval End Time:<span id="endTimeError" class="error">Please enter an event end time</span></label>
-            <input type="text" id="endTimeApprove" placeholder="Enter text in the format 04:35PM" class="time"/>
+            <div id="repeatEventBox" class="orangeBorder block">
+              <p class="title">Repeating Event:</p>
+              <table class="marginTB">
+                <tr>
+                  <td>
+                    <p class="padright">Yes</p>
+                  </td>
+                  <td>
+                    <p class="padright">No</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="radio" name="repeat" value="yes"/>
+                  </td>
+                  <td>
+                    <input type="radio" name="repeat" value="no" checked="checked"/>
+                  </td>
+                </tr>
+              </table>
+            </div><br/>
+            <div id="frequencySelectionBox" class="orangeBorder block hideRepeat">
+              <p class="title">Event Frequency:</p>
+              <table class="marginTB">
+                <tr>
+                  <td>
+                    <p class="padright">Daily</p>
+                  </td>
+                  <td>
+                    <p class="padright">Weekly</p>
+                  </td>
+                  <td>
+                    <p class="padright">Monthly</p>
+                  </td>
+                  <td>
+                    <p class="padright">Yearly</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="radio" name="frequency" value="RRule.DAILY"/>
+                  </td>
+                  <td>
+                    <input type="radio" name="frequency" value="RRule.WEEKLY"/>
+                  </td>
+                  <td>
+                    <input type="radio" name="frequency" value="RRule.MONTHLY"/>
+                  </td>
+                  <td>
+                    <input type="radio" name="frequency" value="RRule.YEARLY"/>
+                  </td>
+                </tr>
+              </table>
+            </div><br class="hideRepeat"/>
+            <div id="daySelectionBox" class="orangeBorder block hideRepeat">
+              <p class="title">Days of the Week the Event Will Happen On:</p>
+              <table class="marginTB">
+                <tr>
+                  <td>
+                    <p class="padright">Monday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Tuesday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Wednesday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Thursday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Friday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Saturday</p>
+                  </td>
+                  <td>
+                    <p class="padright">Sunday</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" name="days" value="1"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="2"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="3"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="4"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="5"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="6"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="days" value="7"/>
+                  </td>
+                </tr>
+              </table>
+            </div><br class="hideRepeat"/>
+            <div id="monthSelectionBox" class="orangeBorder block hideRepeat">
+              <p class="title">Months of the Year the Event May Happen In:</p>
+              <table class="marginTB">
+                <tr>
+                  <td>
+                    <p class="padright">January</p>
+                  </td>
+                  <td>
+                    <p class="padright">February</p>
+                  </td>
+                  <td>
+                    <p class="padright">March</p>
+                  </td>
+                  <td>
+                    <p class="padright">April</p>
+                  </td>
+                  <td>
+                    <p class="padright">May</p>
+                  </td>
+                  <td>
+                    <p class="padright">June</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" name="months" value="1"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="2"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="3"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="4"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="5"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="6"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="padright">July</p>
+                  </td>
+                  <td>
+                    <p class="padright">August</p>
+                  </td>
+                  <td>
+                    <p class="padright">September</p>
+                  </td>
+                  <td>
+                    <p class="padright">October</p>
+                  </td>
+                  <td>
+                    <p class="padright">November</p>
+                  </td>
+                  <td>
+                    <p class="padright">December</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" name="months" value="7"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="8"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="9"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="10"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="11"/>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="months" value="12"/>
+                  </td>
+                </tr>
+              </table>
+            </div><br class="hideRepeat"/>
+            <label for="stopDate" class="hideRepeat">Stop Date:<span id="stopDateError" class="error">Please enter an event start time</span></label>
+            <input type="text" id="stopDate" placeholder="Optional - No events will happen past this date" class="time hideRepeat"/>
+            <label for="instanceCount" class="hideRepeat">Max Occurrences:<span id="instanceCountError" class="error">Must be a number</span></label>
+            <input type="text" id="instanceCount" placeholder="Optional - No more than this number of events will be made" class="hideRepeat"/>
+            <label for="interval" class="hideRepeat">Interval:<span id="intervalError" class="error">Must be a number</span></label>
+            <input type="text" id="interval" placeholder="Optional - For example: 2 could mean every 2 weeks" class="hideRepeat"/>
+            <label for="englishMeaning" class="hideRepeat">English Text of your Event:</label>
+            <p id="englishMeaning" class="viewPage hideRepeat">No Result Yet</p>
+            <!--label(for='startTimeReg') Registration Start Time:-->
+            <!--	span#startTimeError.error Please enter an event start time-->
+            <!--input(type='text', id='startTimeReg', class='time', placeholder="Enter text in the format 03:35PM")-->
+            <!--label(for='endTimeReg') Registration End Time:-->
+            <!--	span#endTimeError.error Please enter an event end time-->
+            <!--input(type='text', id='endTimeReg', class='time', placeholder="Enter text in the format 04:35PM")-->
+            <!--label(for='startTimeApprove') Approval Start Time:-->
+            <!--	span#startTimeError.error Please enter an event start time-->
+            <!--input(type='text', id='startTimeApprove', class='time', placeholder="Enter text in the format 03:35PM")-->
+            <!--label(for='endTimeApprove') Approval End Time:-->
+            <!--	span#endTimeError.error Please enter an event end time-->
+            <!--input(type='text', id='endTimeApprove', class='time', placeholder="Enter text in the format 04:35PM")-->
             <label for="profCEUs">Professional Studies CEUs:<span id="profCEUsError" class="error">Please enter a valid CEU quantity</span></label>
             <input type="text" id="profCEUs" placeholder=".2"/>
             <label for="genCEUs">General Studies CEUs:<span id="genCEUsError" class="error">Please enter a valid CEU quantity</span></label>

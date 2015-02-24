@@ -4,8 +4,8 @@
     <title>Professional Development Program</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-    <link rel="dns-prefetch" href="//google-analytics.com"/>
+    <link rel="dns-prefetch" href="http://fonts.googleapis.com"/>
+    <link rel="dns-prefetch" href="http://google-analytics.com"/>
     <link rel="icon" href="imgs/favicon.png"/>
     <link rel="stylesheet" href="fullcalendar.css"/>
     <link rel="stylesheet" href="../time/bootstrap.css"/>
@@ -63,13 +63,12 @@
        });
        
        $.ajax({
-         type: "POST",
-         url: rootLoc + "/calendar/getevent",
-         data: "event_uid=" + eventId,
+         type: "GET",
+         url: rootLoc + "/api/v1/calendar/events/" + eventId,
          cache: false,
          success: function(result) {
           console.log(result);
-          result = $.parseJSON(result);
+          
           console.log(typeof result);
           console.log(result["title"]);
           console.log(result['location']);
@@ -80,17 +79,30 @@
           console.log(result['approval_start']);
           console.log(result['approval_end']);
           console.log(result['description']);
+          console.log(result['ceus']);
           
           //Prefill the boxes
           $("#title").html(result['title']);
           $("#loc").html(result['location']);
-          $("#startTime").html(result['start']);
-          $("#endTime").html(result['end']);
-          $("#startTimeReg").html(result['registration_start']);
-          $("#endTimeReg").html(result['registration_end']);
-          $("#startTimeApprove").html(result['approval_start']);
-          $("#endTimeApprove").html(result['registration_end']);
+          $("#startTime").html(formatDate(result['start']));
+          $("#endTime").html(formatDate(result['end']));
+          $("#startTimeReg").html(formatDate(result['registration_start']));
+          $("#endTimeReg").html(formatDate(result['registration_end']));
+          $("#startTimeApprove").html(formatDate(result['approval_start']));
+          $("#endTimeApprove").html(formatDate(result['registration_end']));
           $("#description").html(result['description']);
+          
+          if(result['ceus']['type'] === "general"){
+           $("#genCEUs").html(result['ceus']['scalar']);
+           $("#profCEUs").html("0");
+          }else if(result['ceus']['type'] === "professional"){
+           $("#genCEUs").html("0");
+           $("#profCEUs").html(result['ceus']['scalar']);
+          }else{
+           $("#genCEUs").html("0");
+           $("#profCEUs").html("0");
+          }
+          
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) { 
           console.log("Status: " + textStatus); 
@@ -126,14 +138,14 @@
               <p id="startTime" class="viewPage"></p>
               <label for="endTime">Event End Time:</label>
               <p id="endTime" class="viewPage"></p>
-              <label for="startTimeReg">Registration Start Time:</label>
-              <p id="startTimeReg" class="viewPage"></p>
-              <label for="endTimeReg">Registration End Time:</label>
-              <p id="endTimeReg" class="viewPage"></p>
-              <label for="startTimeApprove">Approval Start Time:</label>
-              <p id="startTimeApprove" class="viewPage"></p>
-              <label for="endTimeApprove">Approval End Time:</label>
-              <p id="endTimeApprove" class="viewPage"></p>
+              <!--label(for='startTimeReg') Registration Start Time:-->
+              <!--p(id='startTimeReg', class='viewPage')-->
+              <!--label(for='endTimeReg') Registration End Time:-->
+              <!--p(id='endTimeReg', class='viewPage')-->
+              <!--label(for='startTimeApprove') Approval Start Time:-->
+              <!--p(id='startTimeApprove', class='viewPage')-->
+              <!--label(for='endTimeApprove') Approval End Time:-->
+              <!-- p(id='endTimeApprove', class='viewPage')-->
               <label for="profCEUs">Professional Studies CEUs:</label>
               <p id="profCEUs" class="viewPage"></p>
               <label for="genCEUs">General Studies CEUs:</label>

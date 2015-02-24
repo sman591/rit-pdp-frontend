@@ -28,6 +28,16 @@ function getQueryVariable(variable) {
 	}
 }
 
+function formatDate(dateString){
+	console.log("FormatDate: " + dateString);
+	if (dateString !== undefined && dateString !== null) {
+		result = moment(dateString).format( "MM/DD/YYYY hh:mm a");
+		console.log(result);
+		return result;
+	}
+	return "";
+}
+
 function getMonthNum(mon){
 	var dates = {};
 	dates["jan"] = "01";

@@ -4,7 +4,7 @@
   clear: both;
 }
 
-input, textarea, select, .error, .block, .container {
+.viewPage, input, textarea, select, .error, .block, .container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -392,7 +392,7 @@ label {
   color: white;
 }
 
-input, textarea, select {
+.viewPage, input, textarea, select {
   border-radius: 3px;
   background: #eeedd6;
   position: relative;
@@ -411,7 +411,7 @@ input:focus, textarea:focus, select:focus {
   border-color: #513127;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   cursor: pointer;
   margin-bottom: 0;
   background: #f36e21;
@@ -422,7 +422,7 @@ input[type="submit"] {
   transition: background 0.5s;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
   background: #513127;
   border-color: #513127;
 }
@@ -599,12 +599,25 @@ strong.italics {
 .block .content {
   margin: 2em;
 }
-.block ul > li:not(.topic), .block ol > li:not(.topic) {
-  margin-left: 1.75em;
-}
-.block ul > .topic, .block ol > .topic {
+.block ul > li.topic, .block ul > li.subTop, .block ol > li.topic, .block ol > li.subTop {
   font-weight: bold;
   list-style: none;
+  margin-left: 0em;
+}
+.block ul > li.sub, .block ol > li.sub {
+  margin-left: 3.5em;
+}
+.block ul > li.subTop, .block ol > li.subTop {
+  margin-left: 1.75em;
+}
+.block ul > li.item, .block ol > li.item {
+  margin-left: 1.75em;
+}
+.block ul > li, .block ol > li {
+  margin-left: 1.75em;
+}
+.block > .block {
+  border: 0.25rem solid #f36e21;
 }
 .block > .important {
   color: #f36e21;
@@ -734,67 +747,75 @@ header > .container > nav {
 }
 
 .Home.selected ~ .swoosh {
-  left: 43px;
+  left: 41px;
+}
+
+.MyAccount.selected ~ .swoosh {
+  left: 148px;
 }
 
 .Calendar.selected ~ .swoosh {
-  left: 128px;
+  left: 228px;
 }
 
 .Committee.selected ~ .swoosh {
-  left: 227px;
+  left: 321px;
 }
 
 .Forms.selected ~ .swoosh {
-  left: 291px;
+  left: 381px;
 }
 
 .Resources.selected ~ .swoosh {
-  left: 386px;
+  left: 473px;
 }
 
 .Blog.selected ~ .swoosh {
-  left: 436px;
+  left: 521px;
 }
 
 .Contact.selected ~ .swoosh {
-  left: 511px;
+  left: 591px;
 }
 
 .FAQ.selected ~ .swoosh {
-  left: 556px;
+  left: 639px;
 }
 
 .Home:hover ~ .swoosh {
-  left: 43px;
+  left: 41px;
+}
+
+.MyAccount:hover ~ .swoosh {
+  left: 148px;
 }
 
 .Calendar:hover ~ .swoosh {
-  left: 128px;
+  left: 228px;
 }
 
 .Committee:hover ~ .swoosh {
-  left: 227px;
+  left: 321px;
 }
 
 .Forms:hover ~ .swoosh {
-  left: 291px;
+  left: 381px;
 }
 
 .Resources:hover ~ .swoosh {
-  left: 386px;
+  left: 473px;
 }
 
 .Blog:hover ~ .swoosh {
-  left: 436px;
+  left: 521px;
 }
 
 .Contact:hover ~ .swoosh {
-  left: 511px;
+  left: 591px;
 }
 
 .FAQ:hover ~ .swoosh {
-  left: 556px;
+  left: 639px;
 }
 
 .person {

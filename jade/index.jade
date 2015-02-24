@@ -10,23 +10,31 @@ block script
 			var formatted = (curr_month + "/" +  curr_date + "/" + curr_year + " 12:00 AM");
 			console.log(formatted);
 
-			var dataString = "start=" + formatted;
-			dataString += '&n='+ 5;
+			//var dataString = "start=" + formatted;
+			//dataString += '&n='+ 5;
+			console.log(rootLoc + "/api/v1/calendar/events/?maxResults=20&timeMin=" + encodeURI(date));
 			$.ajax({
-				type: "POST",
-				url: rootLoc + "/calendar/get_n_events",
-				data: dataString,
+				type: "GET",
+				url: (rootLoc + "/api/v1/calendar/events/?maxResults=20&timeMin=" + encodeURI(date)),
 				cache: false,
 				success: function(result) {
-					result = $.parseJSON(result);
 					console.log(result);
+					//result = $.parseJSON(result);
+					//console.log(result);
 
-					if (result.length != 0){
+					if (result['items'].length != 0){
 						$(".events").html("");
-						for (var i = 0; i < result.length; ++i) {
-							$(".events").append("<li class='topic'>" + result[i]['title'] + ": " + result[i]['start'] + "</li>");
-							$(".events").append("<li>Location: " + result[i]['location'] + "</li>");
-							$(".events").append("<li>Description: " + result[i]['description'] + "</li>");
+						for (var i = 0; i < result['items'].length; ++i) {
+							var item = result['items'][i];
+							console.log(item);
+
+							var startTime = moment(item['start']).format( "MM/DD/YYYY");
+
+							console.log(startTime);
+
+							$(".events").append("<li class='topic'>" + item['title'] + ": " + startTime + "</li>");
+							$(".events").append("<li>Location: " + item['location'] + "</li>");
+							$(".events").append("<li>Description: " + item['description'] + "</li>");
 						}
 					}
 				},

@@ -3,6 +3,9 @@ extends !templates/basic.jade
 block script 
 	script(type='text/javascript').
 		$(document).ready(function() {
+			//$( "#frequencySelectionBox" ).hide();
+			//$( "#daySelectionBox" ).hide();
+			$('.hideRepeat').hide();
 			
 			$('.time').datetimepicker();
 
@@ -74,13 +77,27 @@ block script
 					}
 				});
 			});
+			
+			$('input[type=radio][name=repeat]').change(function() {
+				if (this.value == 'yes') {
+					//$( "#frequencySelectionBox" ).show();
+					//$( "#daySelectionBox" ).show();
+					$('.hideRepeat').show();
+				}
+				else if (this.value == 'no') {
+					$('#frequencySelectionBox').find("input:radio").prop("checked", false).end();
+					$('#daySelectionBox').find("input:checkbox").prop("checked", false).end();
+					$('.hideRepeat').hide();
+				}
+			});
+
 		});
 
 block nav
 	+nav('Calendar')
 
 block main
-	div.block.onehalf.center
+	div.block.twothird.center
 		h2 Add Event
 		form#addEventForm.content.center
 			input(type='button', id='back', value='Back')
@@ -104,21 +121,172 @@ block main
 				span#endTimeError.error Please enter an event end time
 			input(type='text', id='endTime', class='time', placeholder="Enter text in the format 04:35PM")
 
-			label(for='startTimeReg') Registration Start Time:
-				span#startTimeError.error Please enter an event start time
-			input(type='text', id='startTimeReg', class='time', placeholder="Enter text in the format 03:35PM")
+			div#repeatEventBox.orangeBorder.block
+					p.title Repeating Event:
 
-			label(for='endTimeReg') Registration End Time:
-				span#endTimeError.error Please enter an event end time
-			input(type='text', id='endTimeReg', class='time', placeholder="Enter text in the format 04:35PM")
+					table.marginTB
+						tr
+							td
+								p.padright Yes
+							td
+								p.padright No
+						tr
+							td
+								input(type="radio" name="repeat" value="yes")
+							td
+								input(type="radio" name="repeat" value="no" checked)
+			br
 
-			label(for='startTimeApprove') Approval Start Time:
-				span#startTimeError.error Please enter an event start time
-			input(type='text', id='startTimeApprove', class='time', placeholder="Enter text in the format 03:35PM")
+			div#frequencySelectionBox.orangeBorder.block.hideRepeat
+					p.title Event Frequency:
 
-			label(for='endTimeApprove') Approval End Time:
-				span#endTimeError.error Please enter an event end time
-			input(type='text', id='endTimeApprove', class='time', placeholder="Enter text in the format 04:35PM")
+					table.marginTB
+						tr
+							td
+								p.padright Daily
+							td
+								p.padright Weekly
+							td
+								p.padright Monthly
+							td
+								p.padright Yearly
+						tr
+							td
+								input(type="radio" name="frequency" value="RRule.DAILY")
+							td
+								input(type="radio" name="frequency" value="RRule.WEEKLY")
+							td
+								input(type="radio" name="frequency" value="RRule.MONTHLY")
+							td
+								input(type="radio" name="frequency" value="RRule.YEARLY")
+			br.hideRepeat
+
+			div(id="daySelectionBox").orangeBorder.block.hideRepeat
+				p.title Days of the Week the Event Will Happen On:
+
+				table.marginTB
+					tr
+						td
+							p.padright Monday
+						td 
+							p.padright Tuesday
+						td
+							p.padright Wednesday
+						td 
+							p.padright Thursday
+						td
+							p.padright Friday
+						td 
+							p.padright Saturday
+						td
+							p.padright Sunday
+					tr
+						td
+							input(type="checkbox" name="days" value="1")
+						td
+							input(type="checkbox" name="days" value="2")
+						td
+							input(type="checkbox" name="days" value="3")
+						td
+							input(type="checkbox" name="days" value="4")
+						td
+							input(type="checkbox" name="days" value="5")
+						td
+							input(type="checkbox" name="days" value="6")
+						td
+							input(type="checkbox" name="days" value="7")
+
+			br.hideRepeat
+
+			div(id="monthSelectionBox").orangeBorder.block.hideRepeat
+				p.title Months of the Year the Event May Happen In:
+
+				table.marginTB
+					tr
+						td
+							p.padright January
+						td
+							p.padright February
+						td
+							p.padright March
+						td 
+							p.padright April
+						td
+							p.padright May
+						td 
+							p.padright June
+					tr
+						td
+							input(type="checkbox" name="months" value="1")
+						td
+							input(type="checkbox" name="months" value="2")
+						td
+							input(type="checkbox" name="months" value="3")
+						td
+							input(type="checkbox" name="months" value="4")
+						td
+							input(type="checkbox" name="months" value="5")
+						td
+							input(type="checkbox" name="months" value="6")
+					
+					tr
+						td
+							p.padright July
+						td
+							p.padright August
+						td
+							p.padright September
+						td 
+							p.padright October
+						td
+							p.padright November
+						td 
+							p.padright December
+					tr
+						td
+							input(type="checkbox" name="months" value="7")
+						td
+							input(type="checkbox" name="months" value="8")
+						td
+							input(type="checkbox" name="months" value="9")
+						td
+							input(type="checkbox" name="months" value="10")
+						td
+							input(type="checkbox" name="months" value="11")
+						td
+							input(type="checkbox" name="months" value="12")
+			br.hideRepeat
+
+			label(for='stopDate').hideRepeat Stop Date:
+				span#stopDateError.error Please enter an event start time
+			input(type='text', id='stopDate', class='time', placeholder="Optional - No events will happen past this date").hideRepeat
+
+			label(for='instanceCount').hideRepeat Max Occurrences:
+				span#instanceCountError.error Must be a number
+			input(type='text', id='instanceCount', placeholder="Optional - No more than this number of events will be made").hideRepeat
+
+			label(for='interval').hideRepeat Interval:
+				span#intervalError.error Must be a number
+			input(type='text', id='interval', placeholder="Optional - For example: 2 could mean every 2 weeks").hideRepeat
+
+			label(for='englishMeaning').hideRepeat English Text of your Event:
+			p(id='englishMeaning', class='viewPage').hideRepeat No Result Yet
+
+			//label(for='startTimeReg') Registration Start Time:
+			//	span#startTimeError.error Please enter an event start time
+			//input(type='text', id='startTimeReg', class='time', placeholder="Enter text in the format 03:35PM")
+
+			//label(for='endTimeReg') Registration End Time:
+			//	span#endTimeError.error Please enter an event end time
+			//input(type='text', id='endTimeReg', class='time', placeholder="Enter text in the format 04:35PM")
+
+			//label(for='startTimeApprove') Approval Start Time:
+			//	span#startTimeError.error Please enter an event start time
+			//input(type='text', id='startTimeApprove', class='time', placeholder="Enter text in the format 03:35PM")
+
+			//label(for='endTimeApprove') Approval End Time:
+			//	span#endTimeError.error Please enter an event end time
+			//input(type='text', id='endTimeApprove', class='time', placeholder="Enter text in the format 04:35PM")
 
 			label(for='profCEUs') Professional Studies CEUs:
 				span#profCEUsError.error Please enter a valid CEU quantity

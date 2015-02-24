@@ -46,13 +46,12 @@ block script
 			});
 
 			$.ajax({
-					type: "POST",
-					url: rootLoc + "/calendar/getevent",
-					data: "event_uid=" + eventId,
+					type: "GET",
+					url: rootLoc + "/api/v1/calendar/events/" + eventId,
 					cache: false,
 					success: function(result) {
 						console.log(result);
-						result = $.parseJSON(result);
+
 						console.log(typeof result);
 						console.log(result["title"]);
 						console.log(result['location']);
@@ -63,17 +62,30 @@ block script
 						console.log(result['approval_start']);
 						console.log(result['approval_end']);
 						console.log(result['description']);
+						console.log(result['ceus']);
 
 						//Prefill the boxes
 						$("#title").html(result['title']);
 						$("#loc").html(result['location']);
-						$("#startTime").html(result['start']);
-						$("#endTime").html(result['end']);
-						$("#startTimeReg").html(result['registration_start']);
-						$("#endTimeReg").html(result['registration_end']);
-						$("#startTimeApprove").html(result['approval_start']);
-						$("#endTimeApprove").html(result['registration_end']);
+						$("#startTime").html(formatDate(result['start']));
+						$("#endTime").html(formatDate(result['end']));
+						$("#startTimeReg").html(formatDate(result['registration_start']));
+						$("#endTimeReg").html(formatDate(result['registration_end']));
+						$("#startTimeApprove").html(formatDate(result['approval_start']));
+						$("#endTimeApprove").html(formatDate(result['registration_end']));
 						$("#description").html(result['description']);
+
+						if(result['ceus']['type'] === "general"){
+							$("#genCEUs").html(result['ceus']['scalar']);
+							$("#profCEUs").html("0");
+						}else if(result['ceus']['type'] === "professional"){
+							$("#genCEUs").html("0");
+							$("#profCEUs").html(result['ceus']['scalar']);
+						}else{
+							$("#genCEUs").html("0");
+							$("#profCEUs").html("0");
+						}
+
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) { 
 						console.log("Status: " + textStatus); 
@@ -112,17 +124,17 @@ block main
 				label(for='endTime') Event End Time:
 				p(id='endTime', class='viewPage')
 
-				label(for='startTimeReg') Registration Start Time:
-				p(id='startTimeReg', class='viewPage')
+				//label(for='startTimeReg') Registration Start Time:
+				//p(id='startTimeReg', class='viewPage')
 
-				label(for='endTimeReg') Registration End Time:
-				p(id='endTimeReg', class='viewPage')
+				//label(for='endTimeReg') Registration End Time:
+				//p(id='endTimeReg', class='viewPage')
 
-				label(for='startTimeApprove') Approval Start Time:
-				p(id='startTimeApprove', class='viewPage')
+				//label(for='startTimeApprove') Approval Start Time:
+				//p(id='startTimeApprove', class='viewPage')
 
-				label(for='endTimeApprove') Approval End Time:
-				p(id='endTimeApprove', class='viewPage')
+				//label(for='endTimeApprove') Approval End Time:
+				// p(id='endTimeApprove', class='viewPage')
 
 				label(for='profCEUs') Professional Studies CEUs:
 				p(id='profCEUs', class='viewPage')
