@@ -38,6 +38,22 @@ module.exports = function(grunt){
         }
       }
     },
+    jade: {
+      compile: {
+        options: {
+          data: {
+            debug: false
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: 'app/views',
+          src: ['**/*.jade'],
+          dest: 'public',
+          ext: '.html'
+        }]
+      }
+    },
     watch: {
       coffee: {
         files: ['app/coffeescript/**/*.coffee'],
@@ -49,6 +65,13 @@ module.exports = function(grunt){
       styles: {
         files: ['app/stylesheets/**/*.sass'],
         tasks: ['compass'],
+        options: {
+          livereload: true,
+        }
+      },
+      jade: {
+        files: ['app/views/**/*.jade'],
+        tasks: ['jade'],
         options: {
           livereload: true,
         }
@@ -67,6 +90,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-gh-pages');
 
   grunt.registerTask('build', ['clean', 'coffee', 'compass']);
