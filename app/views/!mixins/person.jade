@@ -4,13 +4,13 @@ mixin person(person, klass)
 	include ../!includes/people/_directory
 
 	//- Build img path
-	firstLetter = person.charAt(0).toLowerCase();
-	lowercaseLastName = person.split(" ")[1].toLowerCase();
+	- var firstLetter = person.charAt(0).toLowerCase();
+	- var lowercaseLastName = person.split(" ")[1].toLowerCase();
 
 	//- info variables
-	imgPath = "imgs/people/" +  firstLetter + "_" + lowercaseLastName + ".jpg";
-	altText = "Photo of " + person;
-	mailto = 'mailto:' + email + '@rit.edu';
+	- var imgPath = "imgs/people/" +  firstLetter + "_" + lowercaseLastName + ".jpg";
+	- var altText = "Photo of " + person;
+	- var mailto = 'mailto:' + email + '@rit.edu';
 	//- var position from included directory info
 	//- var description from included directory info
 
