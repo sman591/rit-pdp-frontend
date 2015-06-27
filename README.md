@@ -1,4 +1,4 @@
-PDP-Front-end
+RIT PDP Front End
 =============
 
 Front end for the RIT NTID DAS PDP website. Say that acronym 10 times fast.
