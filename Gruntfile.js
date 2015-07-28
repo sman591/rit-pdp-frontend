@@ -82,6 +82,22 @@ module.exports = function(grunt){
         base: 'public'
       },
       src: ['**']
+    },
+    'sftp-deploy': {
+      build: {
+        auth: {
+          host: 'athena.csh.rit.edu',
+          port: 22,
+          authKey: 'pdp'
+        },
+        // cache: 'sftpCache.json',
+        src: './public/',
+        dest: '/home/daspdp/project/pdp-backend/daspdpsite/static/',
+        exclusions: ['/path/to/source/folder/**/.DS_Store', '/path/to/source/folder/**/Thumbs.db', 'dist/tmp'],
+        serverSep: '/',
+        concurrency: 4,
+        progress: true
+      }
     }
   });
 
@@ -92,7 +108,9 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-sftp-deploy');
 
   grunt.registerTask('build', ['clean', 'coffee', 'compass']);
+  grunt.registerTask('deploy', ['build', 'sftp-deploy']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };

@@ -40,4 +40,6 @@ Useful commands:
 
 # Deployment
 
-Coming soon...
+First, create the file `.ftppass` in the root of the repository and [add your credentials](https://github.com/thrashr888/grunt-sftp-deploy#authentication-parameters).
+
+Then, run ```grunt deploy``` to deploy the app.
