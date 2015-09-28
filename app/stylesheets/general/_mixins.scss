@@ -1,8 +1,0 @@
-@function rem($pixels) {
-	@return #{$pixels/$font-size}rem;
-}
-
-@mixin transition($type) {
-	-webkit-transition:$type .5s;
-	transition:$type .5s;
-}
