@@ -1,9 +1,26 @@
 module.exports = function(grunt){
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    project: {
+      app: ['app'],
+      public: ['public'],
+      src: {
+        assets: ['<%= project.app %>/assets'],
+        css: ['<%= project.src.assets %>/stylesheets'],
+        js: ['<%= project.src.assets %>/javascripts'],
+        views: ['<%= project.app %>/views']
+      },
+      build: {
+        assets: ['<%= project.public %>/assets'],
+        css: ['<%= project.build.assets %>'],
+        js: ['<%= project.build.assets %>'],
+        views: ['<%= project.public %>']
+      }
+    },
     connect: {
       server: {
         options: {
-          base: './public',
+          base: './<%= project.public[0] %>',
           port: '4000',
           host: '*'
         }
@@ -11,7 +28,7 @@ module.exports = function(grunt){
     },
     clean: {
       build: {
-        src: ['public/javascripts', 'public/stylesheets']
+        src: ['<%= project.public %>']
       }
     },
     coffee: {
@@ -21,9 +38,9 @@ module.exports = function(grunt){
         },
         files: [{
           expand: true,
-          cwd: 'app/coffeescript',
+          cwd: '<%= project.src.js[0] %>',
           src: ['**/*.coffee', '**/*.js'],
-          dest: 'public/javascripts',
+          dest: '<%= project.build.js[0] %>',
           ext: '.js'
         }]
       }
@@ -32,8 +49,8 @@ module.exports = function(grunt){
       dist: {
         options: {
           bundleExec: true,
-          sassDir: 'app/stylesheets',
-          cssDir: 'public/stylesheets',
+          sassDir: '<%= project.src.css %>',
+          cssDir: '<%= project.build.css %>',
           environment: 'production'
         }
       }
@@ -47,30 +64,30 @@ module.exports = function(grunt){
         },
         files: [{
           expand: true,
-          cwd: 'app/views',
+          cwd: '<%= project.src.views[0] %>',
           src: ['**/*.jade'],
-          dest: 'public',
+          dest: '<%= project.build.views[0] %>',
           ext: '.html'
         }]
       }
     },
     watch: {
       coffee: {
-        files: ['app/coffeescript/**/*.coffee'],
+        files: ['<%= project.src.js %>/**/*.coffee'],
         tasks: ['coffee'],
         options: {
           livereload: true,
         }
       },
       styles: {
-        files: ['app/stylesheets/**/*.sass'],
+        files: ['<%= project.src.css %>/**/*.sass'],
         tasks: ['compass'],
         options: {
           livereload: true,
         }
       },
       jade: {
-        files: ['app/views/**/*.jade'],
+        files: ['<%= project.src.views %>/**/*.jade'],
         tasks: ['jade'],
         options: {
           livereload: true,
@@ -79,7 +96,7 @@ module.exports = function(grunt){
     },
     'gh-pages': {
       options: {
-        base: 'public'
+        base: '<%= project.public[0] %>'
       },
       src: ['**']
     },
@@ -110,7 +127,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-sftp-deploy');
 
-  grunt.registerTask('build', ['clean', 'coffee', 'compass']);
+  grunt.registerTask('build', ['clean', 'jade', 'compass', 'coffee']);
   grunt.registerTask('deploy', ['build', 'sftp-deploy']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
