@@ -8,13 +8,17 @@ module.exports = function(grunt){
         assets: ['<%= project.app %>/assets'],
         css: ['<%= project.src.assets %>/stylesheets'],
         js: ['<%= project.src.assets %>/javascripts'],
-        views: ['<%= project.app %>/views']
+        views: ['<%= project.app %>/views'],
+        images: ['<%= project.src.assets %>/images'],
+        files: ['<%= project.src.assets %>/files']
       },
       build: {
         assets: ['<%= project.public %>/assets'],
         css: ['<%= project.build.assets %>'],
         js: ['<%= project.build.assets %>'],
-        views: ['<%= project.public %>']
+        views: ['<%= project.public %>'],
+        images: ['<%= project.build.assets %>'],
+        files: ['<%= project.build.assets[0] %>/files']
       }
     },
     connect: {
@@ -71,6 +75,20 @@ module.exports = function(grunt){
         }]
       }
     },
+    copy: {
+      images: {
+        expand: true,
+        cwd: '<%= project.src.images[0] %>',
+        src: '**',
+        dest: '<%= project.build.images[0] %>/',
+      },
+      files: {
+        expand: true,
+        cwd: '<%= project.src.files[0] %>',
+        src: '**',
+        dest: '<%= project.build.files[0] %>/',
+      }
+    },
     watch: {
       coffee: {
         files: ['<%= project.src.js %>/**/*.coffee'],
@@ -91,6 +109,27 @@ module.exports = function(grunt){
         tasks: ['jade'],
         options: {
           livereload: true,
+        }
+      },
+      images: {
+        files: ['<%= project.src.images %>/**/*'],
+        tasks: ['copy:images'],
+        options: {
+          livereload: true,
+        }
+      },
+      files: {
+        files: ['<%= project.src.files %>/**/*'],
+        tasks: ['copy:files'],
+        options: {
+          livereload: true,
+        }
+      },
+      configFiles: {
+        files: [ 'Gruntfile.js', 'config/*.js' ],
+        tasks: ['build'],
+        options: {
+          reload: true
         }
       }
     },
@@ -124,10 +163,11 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-sftp-deploy');
 
-  grunt.registerTask('build', ['clean', 'jade', 'compass', 'coffee']);
+  grunt.registerTask('build', ['clean', 'jade', 'compass', 'coffee', 'copy']);
   grunt.registerTask('deploy', ['build', 'sftp-deploy']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
