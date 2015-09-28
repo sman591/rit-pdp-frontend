@@ -27,17 +27,12 @@ html(lang="en")
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 
   body(class='preload')
-    header: div.container
-      a(href='index.html', class='logo')
-        img(src='imgs/PDPLogo.png', alt='PDP Logo')
-      p(class='motto')
-        span Pause for PD...
-        | It's good for you!
-      nav(class='breadcrumbs')
-        a(href='http://rit.edu', target='_blank') RIT
-        a(href='http://ntid.rit.edu', target='_blank') NTID
-        a(href='http://ntid.rit.edu/das', target='_blank') DAS
-        a(href='http://index.html') Professional Development Program
+    header
+      .container
+        a(href='index.html', class='logo')
+          img(src='assets/PDPLogo.png', alt='PDP Logo')
+        p(class='motto')
+          span Pause for PD... It's good for you!
       block nav
 
     main: div.container
