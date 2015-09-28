@@ -2,3 +2,5 @@ node_modules
 .sass-cache
 .grunt
 .ftppass
+public/
+app/bower_components

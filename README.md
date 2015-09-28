@@ -19,6 +19,7 @@ Front end for the RIT NTID DAS PDP website. Say that acronym 10 times fast.
   $ cd rit-pdp-frontend
   $ bundle install
   $ npm install
+  $ bower install
   ```
 
 4. Startup the local development environment
