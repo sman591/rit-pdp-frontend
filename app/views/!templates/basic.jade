@@ -29,10 +29,23 @@ html(lang="en")
   body(class='preload')
     header
       .container
-        a(href='index.html', class='logo')
-          img(src='assets/PDPLogo.png', alt='PDP Logo')
-        p(class='motto')
-          span Pause for PD... It's good for you!
+        .col-sm-6
+          .brand
+            a(href='index.html', class='logo')
+              img(src='assets/PDPLogo.png', srcset='assets/PDPLogo@2x.png 2x, assets/PDPLogo@3x.png 3x' alt='PDP Logo')
+            p(class='motto')
+              span Pause for PD... It's good for you!
+        .col-sm-6
+          .account
+            span.welcome Hello, John!
+            span
+              a(href='')
+                i.fa.fa-user
+                |   My Account
+            span
+              a(href='')
+                i.fa.fa-sign-out
+                |   Sign Out
       block nav
 
     main: div.container

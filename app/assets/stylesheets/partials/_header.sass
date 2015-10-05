@@ -1,0 +1,32 @@
+header
+  background: url(/assets/header-bg.jpg) center top no-repeat
+  min-height: 200px
+  color: #fff
+
+  .brand
+    text-align: center
+    width: 100%
+    max-width: 360px
+    .logo img
+      height: 80px
+      margin: 46px 10px 20px
+    .motto
+      font-size: 20px
+      font-style: italic
+      margin-bottom: 20px
+      @include text-shadow(#000 0px 2px 4px)
+
+  .account
+    background: rgba($orange, 0.7)
+    margin-top: 16px
+    margin-right: -40px
+    padding: 11px 35px 11px 15px
+    float: right
+    @include white-links
+    .welcome
+      font-style: italic
+      font-size: 14px
+    span
+      margin-right: 10px
+    .fa
+      margin-right: 2px

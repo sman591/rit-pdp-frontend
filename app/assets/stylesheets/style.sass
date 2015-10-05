@@ -1,13 +1,10 @@
-// Import Bootstrap Compass integration
-@import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap-compass.scss'
-// Import custom Bootstrap variables
-@import lib/variables
-// Import Bootstrap for Sass
-@import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss'
+@import compass
 
-header
-  background: url(/assets/header-bg.jpg) center top no-repeat
-  min-height: 200px
+@import modules/variables
+@import vendor/bootstrap
+@import modules/white-links
 
-.navbar-wrapper
-  background: rgba($orange, 0.7)
+@import partials/header
+@import partials/navbar
+
+@import '../../bower_components/font-awesome/scss/font-awesome.scss'
