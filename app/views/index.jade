@@ -1,78 +1,37 @@
 extends !templates/basic.jade
 
 block script
-	script(type='text/javascript').
-		$(document).ready(function() {
-			var date = new Date();
-			var curr_date = date.getDate();
-			var curr_month = date.getMonth() + 1; //Months are zero based
-			var curr_year = date.getFullYear();
-			var formatted = (curr_month + "/" +  curr_date + "/" + curr_year + " 12:00 AM");
-			console.log(formatted);
-
-			//var dataString = "start=" + formatted;
-			//dataString += '&n='+ 5;
-			console.log(rootLoc + "/api/v1/calendar/events/?maxResults=20&timeMin=" + encodeURI(date));
-			$.ajax({
-				type: "GET",
-				url: (rootLoc + "/api/v1/calendar/events/?maxResults=20&timeMin=" + encodeURI(date)),
-				cache: false,
-				success: function(result) {
-					console.log(result);
-					//result = $.parseJSON(result);
-					//console.log(result);
-
-					if (result['items'].length != 0){
-						$(".events").html("");
-						for (var i = 0; i < result['items'].length; ++i) {
-							var item = result['items'][i];
-							console.log(item);
-
-							var startTime = moment(item['start']).format( "MM/DD/YYYY");
-
-							console.log(startTime);
-
-							$(".events").append("<li class='topic'>" + item['title'] + ": " + startTime + "</li>");
-							$(".events").append("<li>Location: " + item['location'] + "</li>");
-							$(".events").append("<li>Description: " + item['description'] + "</li>");
-						}
-					}
-				},
-			});
-		});
 
 block nav
 	mixin nav('Home')
 
 block main
-	div.block.twothird
-		//- Uncomment the section below if there's something important to say
-		//-
-		//- h2 Important &amp; Time Sensitive
-		//- p.content.important.
-		//- 	A deadline is approaching! Do the thing you have to do before the deadline
+	.row
+		.col-sm-8
+			h2
+				| This Week in PD:
+				strong  Please welcome our new website!
+			p Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor.
+			p
+				|  Nulla vitae elit libero, a
+				strong  pharetra augue
+				|  Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+			p
+				|  Praesent commodo cursus magna, vel
+				u
+					em scelerisque nisl consectetur et.
+				|  Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.
+		.col-sm-4
+			p hello world
+	.row
+		.col-xs-12
+			h2 Upcoming Events
+			ul.content.events
+				li.topic No currently listed events!
+				li Unfourtunately no events are currently listed.  Sorry for the inconvenience.
+	.row
+		.col-xs-12
+			h2 Mission Statement
+			p.content.
+				In support of the Department of Access Services mission the Professional Development Program (PDP) provides all members of the department the opportunity to expand their knowledge base, enhance their skills and advance their careers. PDP activities are developed and delivered through a staff driven collaborative process.
 
-		h2 Upcoming Events
-		ul.content.events
-			li.topic No currently listed events!
-			li Unfourtunately no events are currently listed.  Sorry for the inconvenience.
-			br
-			br
-			br
-			br
-			br
-			br
-
-	div.block.onethird.right
-		h2 Mission Statement
-		p.content.
-			In support of the Department of Access Services mission the Professional Development Program (PDP) provides all members of the department the opportunity to expand their knowledge base, enhance their skills and advance their careers. PDP activities are developed and delivered through a staff driven collaborative process.
-		//- h2 Sign In
-		//- form.content
-		//- 	label(for='username') Username:
-		//- 		span.error Username incorrect
-		//- 	input(type='text', id='username')
-		//- 	label(for='password') Password:
-		//- 		span.error Password incorrect
-		//- 	input(type='password', id='username')
-		//- 	input(type='submit')
