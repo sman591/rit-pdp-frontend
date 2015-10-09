@@ -3,3 +3,18 @@
   line-height: 18px
   padding-top: 20px
   padding-bottom: 20px
+
+.nav
+  margin-right: -15px
+
+.nav > li
+  &:after
+    content: ""
+    position: absolute
+    right: 0
+    top: 20%
+    height: 60%
+    width: 1px
+    background: rgb(255, 174, 128)
+  &:last-child:after
+    display: none
