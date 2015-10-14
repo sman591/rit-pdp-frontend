@@ -1,0 +1,13 @@
+mixin cta-block(month, day, time, title)
+  +cta-block-wrapper
+    h3.month
+      span.month= month
+      span.day= day
+    h5.time= time
+    h2= title
+    button.btn.btn-primary.btn-lg Register &raquo;
+mixin cta-block-wrapper()
+  .cta-block
+    .inner
+      if block
+        block

@@ -3,35 +3,41 @@ extends !templates/basic.jade
 block script
 
 block nav
-	mixin nav('Home')
+  mixin nav('Home')
 
 block main
-	.row
-		.col-sm-8
-			h2
-				| This Week in PD:
-				strong  Please welcome our new website!
-			p Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor.
-			p
-				|  Nulla vitae elit libero, a
-				strong  pharetra augue
-				|  Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-			p
-				|  Praesent commodo cursus magna, vel
-				u
-					em scelerisque nisl consectetur et.
-				|  Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.
-		.col-sm-4
-			p hello world
-	.row
-		.col-xs-12
-			h2 Upcoming Events
-			ul.content.events
-				li.topic No currently listed events!
-				li Unfourtunately no events are currently listed.  Sorry for the inconvenience.
-	.row
-		.col-xs-12
-			h2 Mission Statement
-			p.content.
-				In support of the Department of Access Services mission the Professional Development Program (PDP) provides all members of the department the opportunity to expand their knowledge base, enhance their skills and advance their careers. PDP activities are developed and delivered through a staff driven collaborative process.
+  .row
+    .col-sm-9
+      h2.welcome
+        | This Week in PD:
+        strong  Please welcome our new website!
+      p Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit tempus porttitor.
+      p
+        |  Nulla vitae elit libero, a
+        strong  pharetra augue
+        |  Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+      p
+        |  Praesent commodo cursus magna, vel
+        u
+          em scelerisque nisl consectetur et.
+        |  Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.
+    .col-sm-3
+      +cta-block-wrapper
+        button.btn.btn-primary.btn-lg Previous Weeks &raquo;
+        button.btn.btn-primary.btn-lg PDP Blog &raquo;
+  .row
+    .col-xs-12
+      h2 Upcoming Events
+      +cta-block('September', '22', '7:15pm - 8:00pm', 'Kickoff Seminar')
+      +cta-block('September', '25', '7:15pm - 8:00pm', 'PD Series: Lorem ipsum dolor sit amet')
+      +cta-block('September', '26', '7:15pm - 8:00pm', 'Coming Prepared')
+      +cta-block('October', '2', '7:15pm - 8:00pm', 'PD Series: What to expect in every day PDP')
+      +cta-block-wrapper
+        button.btn.btn-primary.btn-lg More Events &raquo;
+
+  .row
+    .col-xs-12
+      h2 Mission Statement
+      p.content.
+        In support of the Department of Access Services mission the Professional Development Program (PDP) provides all members of the department the opportunity to expand their knowledge base, enhance their skills and advance their careers. PDP activities are developed and delivered through a staff driven collaborative process.
 
