@@ -5,6 +5,7 @@ module.exports = function(grunt){
       app: ['app'],
       public: ['public'],
       src: {
+        bower: ['<%= project.app %>/bower_components'],
         assets: ['<%= project.app %>/assets'],
         css: ['<%= project.src.assets %>/stylesheets'],
         js: ['<%= project.src.assets %>/javascripts'],
@@ -18,6 +19,7 @@ module.exports = function(grunt){
         js: ['<%= project.build.assets %>'],
         views: ['<%= project.public %>'],
         images: ['<%= project.build.assets %>'],
+        fonts: ['<%= project.build.assets[0] %>/fonts'],
         files: ['<%= project.build.assets[0] %>/files']
       }
     },
@@ -81,6 +83,12 @@ module.exports = function(grunt){
         cwd: '<%= project.src.images[0] %>',
         src: '**',
         dest: '<%= project.build.images[0] %>/',
+      },
+      fontawesome: {
+        expand: true,
+        cwd: '<%= project.src.bower[0] %>/font-awesome/fonts/',
+        src: '**',
+        dest: '<%= project.build.fonts[0] %>/',
       },
       files: {
         expand: true,
