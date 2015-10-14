@@ -5,7 +5,8 @@ mixin cta-block(month, day, time, title)
       span.day= day
     h5.time= time
     h2= title
-    button.btn.btn-primary.btn-lg Register &raquo;
+    a(href="").more-info More Info &raquo;
+    a.btn.btn-primary.btn-lg(href="") Register &raquo;
 mixin cta-block-wrapper()
   .cta-block
     .inner

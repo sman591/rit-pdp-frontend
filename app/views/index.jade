@@ -23,8 +23,8 @@ block main
         |  Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.
     .col-sm-3
       +cta-block-wrapper
-        button.btn.btn-primary.btn-lg Previous Weeks &raquo;
-        button.btn.btn-primary.btn-lg PDP Blog &raquo;
+        a.btn.btn-primary.btn-lg(href='') Previous Weeks &raquo;
+        a.btn.btn-primary.btn-lg(href='') PDP Blog &raquo;
   .row
     .col-xs-12
       h2 Upcoming Events
@@ -33,7 +33,7 @@ block main
       +cta-block('September', '26', '7:15pm - 8:00pm', 'Coming Prepared')
       +cta-block('October', '2', '7:15pm - 8:00pm', 'PD Series: What to expect in every day PDP')
       +cta-block-wrapper
-        button.btn.btn-primary.btn-lg More Events &raquo;
+        a.btn.btn-primary.btn-lg(href='/calendarIndex.html') More Events &raquo;
 
   .row
     .col-xs-12
