@@ -60,17 +60,58 @@ html(lang="en")
           | Hey there! This is an alert that displays to everyone across the website until they dismiss it.
       block main
 
-    footer: div.container
-      div(class='left')
-        a(href='http://rit.edu', target='_blank') Rochester Institute of Technology
-        a(href='http://ntid.rit.edu', target='_blank') National Technical Institute for the Deaf
-        a(href='http://ntid.rit.edu/das', target='_blank') Deartment of Access Services
-        p &copy; 2013
-      div(class='logos')
-        a(href='http://www.rid.org/', target='_blank')
-          img(src='assets/RID.png', alt='RID logo')
-        a(href='http://www.rid.org/education/index.cfm/AID/99', target='_blank')
-          img(src='assets/ACET.png', alt='ACET logo')
+    footer
+      .overlay
+      .container
+        .row
+          .col-sm-4
+            .table
+              ul.list-unstyled
+                li
+                  a(href="http://www.rit.edu/") Rochester Institute of Technology
+                li
+                  a(href="http://www.ntid.rit.edu/") National Technical Institute of the Deaf
+                li
+                  a(href="http://www.ntid.rit.edu/das") Department of Access Services
+                li &copy; 2015
+          .col-sm-2
+              .table
+                ul.list-unstyled
+                  each currentPage in ['Home', 'Calendar', 'Committee']
+                    if currentPage == 'Home'
+                      -lowercaseURL = 'index.html'
+                    else if currentPage == 'Calendar'
+                      -lowercaseURL = 'calendarIndex.html'
+                    else if currentPage == 'My Account'
+                      -lowercaseURL = 'userMyAccount.html'
+                    else
+                      -lowercaseURL = currentPage.toLowerCase() + '.html'
+                    li
+                      a(href=lowercaseURL) #{currentPage}
+          .col-sm-2
+            .table
+              ul.list-unstyled
+                each currentPage in ['Resources', 'Blog', 'FAQ', 'Contact']
+                    if currentPage == 'Home'
+                      -lowercaseURL = 'index.html'
+                    else if currentPage == 'Calendar'
+                      -lowercaseURL = 'calendarIndex.html'
+                    else if currentPage == 'My Account'
+                      -lowercaseURL = 'userMyAccount.html'
+                    else
+                      -lowercaseURL = currentPage.toLowerCase() + '.html'
+                    li
+                      a(href=lowercaseURL) #{currentPage}
+          .col-sm-4
+            .table
+              ul.list-unstyled
+                li.img-link
+                  a(href="http://www.rid.org/")
+                    img(src="/assets/RID.png")
+                li.img-link
+                  a(href="http://www.rid.org/continuing-education/acet/")
+                    img(src="/assets/ACET.png")
+
 
     //- JS
     script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
